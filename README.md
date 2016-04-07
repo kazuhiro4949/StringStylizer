@@ -105,7 +105,7 @@ label.attributedText = "you".stylize().strong()
 ```
 
 ## Usage
-#### 1. Convert String to StringStylizer object which is "Styling" state
+#### 1. Convert String to StringStylizer object
 ```swift
 let firstStep = "yay!".stylize() // => StringStylizer<Styling>
 ```
