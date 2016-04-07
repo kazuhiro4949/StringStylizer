@@ -15,7 +15,7 @@ let str = NSAttributedString(string: "some text", attributes: attr)
 ```
 
 StringStylizer enable developers to read and write their code in a linear manner.
-If you wanna convert String to NSAttributedString which has some colors, sizes and fonts, you can write it as follows.
+If you wanna convert String to NSAttributedString which has some colors, sizes and fonts, you can write that as follows.
 ```swift
 let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeue).attr
 ```
