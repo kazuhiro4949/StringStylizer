@@ -1,0 +1,10 @@
+framework module StringStylizer {
+  umbrella header "StringStylizer.h"
+
+  export *
+  module * { export * }
+}
+
+module StringStylizer.Swift {
+    header "StringStylizer-Swift.h"
+}
