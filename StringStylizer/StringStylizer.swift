@@ -335,6 +335,17 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
         return stylizer
     }
     
+    /**
+     count String length
+     
+     - returns: Int
+     */
+    public var count: Int {
+        return _attrString.length
+    }
+    
+    // MARK:- private
+    
     private func rgb(rgb: UInt, alpha: Double) -> UIColor {
         return UIColor(
             red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
@@ -445,10 +456,6 @@ public extension StringStylizer {
         _attributes[NSParagraphStyleAttributeName] = style
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
-    }
-    
-    public var count: Int {
-        return _attrString.length
     }
     
     private func getParagraphStyle() -> NSMutableParagraphStyle {
