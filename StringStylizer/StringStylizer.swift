@@ -100,6 +100,13 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     
     /** 
     The value of NSForegroundColorAttributeName
+    
+    ### example
+     
+    ```
+    "StringStylizer".stylize().color(.redColor()).attr
+    ```
+    <img width="143" src="https://cloud.githubusercontent.com/assets/18320004/14388487/52403352-fde9-11e5-86fe-f94224dcc747.png">
      
     - parameter rgb:UInt
     - parameter alpha:Double (default: 1.0)
@@ -114,6 +121,13 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The value of NSForegroundColorAttributeName
      
+     
+     ### example
+     ```
+     "StringStylizer".stylize().color(0xff0000).attr
+     ```
+     <img width="143" src="https://cloud.githubusercontent.com/assets/18320004/14388487/52403352-fde9-11e5-86fe-f94224dcc747.png">
+     
      - parameter color:UIColor
      - returns: StringStylizer<Styling>
      */
@@ -126,6 +140,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The value of NSFontAttributeName
      
+     ### example
+     ```
+     "StringStylizer".stylize().font(UIFont(name: "Copperplate-Light", size: 17)!).attr
+     ```
+     <img width="163" src="https://cloud.githubusercontent.com/assets/18320004/14388742/6986057c-fdea-11e5-9814-5a610684de0b.png">
+     
      - parameter font:UIFont
      - returns: StringStylizer<Styling>
      */
@@ -137,6 +157,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
 
     /**
      The name value of NSFontAttributeName
+     
+     ### example
+     ```
+     "StringStylizer".stylize().font("Copperplate-Light").attr
+     ```
+     <img width="147" src="https://cloud.githubusercontent.com/assets/18320004/14388776/a274bf68-fdea-11e5-9634-840d0b5fdacb.png">
      
      - parameter name:String
      - returns: StringStylizer<Styling>
@@ -157,6 +183,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The name value of NSFontAttributeName
      
+     ### example
+     ```
+     "StringStylizer".stylize().font(.Copperplate_Light).attr
+     ```
+     <img width="147" src="https://cloud.githubusercontent.com/assets/18320004/14388776/a274bf68-fdea-11e5-9634-840d0b5fdacb.png">
+     
      - parameter name:StringStylizerFontName
      - returns: StringStylizer<Styling>
      */
@@ -175,6 +207,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     
     /**
      The size value of NSFontAttributeName
+     
+     ### example
+     ```
+     "StringStylizer".stylize().font(.Copperplate_Light).attr
+     ```
+     <img width="153" src="https://cloud.githubusercontent.com/assets/18320004/14388859/16328002-fdeb-11e5-99d7-2687525b5e3d.png">
      
      - parameter size:Double
      - returns: StringStylizer<Styling>
@@ -195,6 +233,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The value of NSBackgroundColorAttributeName
      
+     ### example
+     ```
+     "StringStylizer".stylize().background(0xff0000, alpha: 0.5).attr
+     ```
+     <img width="153" src="https://cloud.githubusercontent.com/assets/18320004/14388921/4a685702-fdeb-11e5-8005-efe8024beeb9.png">
+     
      - parameter rgb:UInt
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
@@ -208,6 +252,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The value of NSKernAttributeName
      
+     ### example
+     ```
+     "StringStylizer".stylize().karn(5).attr
+     ```
+     <img width="210" src="https://cloud.githubusercontent.com/assets/18320004/14388994/94d50894-fdeb-11e5-9e78-7c31480bb00c.png">
+     
      - parameter value:Double
      - returns: StringStylizer<Styling>
      */
@@ -219,6 +269,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     
     /**
      The values of NSUnderlineStyleAttributeName and NSUnderlineColorAttributeName
+     
+     ### example
+     ```
+     "StringStylizer".stylize().underline(.StyleSingle, rgb: 0xff0000, alpha: 0.5).attr
+     ```
+     <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389065/db66f77c-fdeb-11e5-8182-de300c85dc0e.png">
      
      - parameter style:NSUnderlineStyle...
      - parameter rgb:UInt? (default:nil)
@@ -240,6 +296,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The values of NSStrokeWidthAttributeName and NSStrokeColorAttributeName
      
+     ### example
+     ```
+     "StringStylizer".stylize().stroke(rgb: 0xff0000, alpha: 1, width: 2).attr
+     ```
+     <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389200/7fca9c74-fdec-11e5-996b-3ead1ac564cc.png">
+     
      - parameter rgb:UInt? (default:nil)
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
@@ -253,6 +315,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     
     /**
      The values of NSStrokeWidthAttributeName and NSStrokeColorAttributeName
+     
+     ### example
+     ```
+     "StringStylizer".stylize().stroke(color: .redColor(), alpha: 1, width: 2).attr
+     ```
+     <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389200/7fca9c74-fdec-11e5-996b-3ead1ac564cc.png">
      
      - parameter color:UIColor
      - parameter alpha:Double (default:1.0)
@@ -268,6 +336,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     
     /**
      The values of NSStrikethroughStyleAttributeName and NSStrikethroughColorAttributeName
+     
+     ### example
+     ```
+     "StringStylizer".stylize().strokeThrogh(.StyleDouble, rgb: 0xff0000, alpha: 1).attr
+     ```
+     <img width="139" src="https://cloud.githubusercontent.com/assets/18320004/14389273/ddc222f2-fdec-11e5-9a80-0181383ef553.png">
      
      - parameter style:NSUnderlineStyle...
      - parameter rgb:UInt? (default:nil)
