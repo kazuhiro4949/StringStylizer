@@ -39,7 +39,6 @@
 		6E3F299C1CB2AB3200702DD3 /* StringStylizerStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStylizerStatus.swift; sourceTree = "<group>"; };
 		6E3F299D1CB2AB3200702DD3 /* String+StringStylizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+StringStylizer.swift"; sourceTree = "<group>"; };
 		6E3F299E1CB2AB3200702DD3 /* Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
-		6E3F29A41CB2ABF100702DD3 /* StringStylizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StringStylizer.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +87,6 @@
 				6E3F299C1CB2AB3200702DD3 /* StringStylizerStatus.swift */,
 				6E3F299D1CB2AB3200702DD3 /* String+StringStylizer.swift */,
 				6E3F299E1CB2AB3200702DD3 /* Operator.swift */,
-				6E3F29A41CB2ABF100702DD3 /* StringStylizer.playground */,
 				6E3F29851CB2AB2600702DD3 /* Info.plist */,
 			);
 			path = StringStylizer;
@@ -400,6 +398,7 @@
 				6E3F29961CB2AB2600702DD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E3F29971CB2AB2600702DD3 /* Build configuration list for PBXNativeTarget "StringStylizerTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +407,7 @@
 				6E3F29991CB2AB2600702DD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

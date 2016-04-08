@@ -46,76 +46,76 @@ class StringStylizerTests: XCTestCase {
     func testFontAndSize() {
         let str = "StringStylizer".stylize().font(.Helvetica).size(17).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 17)!])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has font and size attributed")
     }
     
     func testBackground() {
         let str = "StringStylizer".stylize().background(0x000000).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSBackgroundColorAttributeName: rgb(0x000000, alpha: 1.0)])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has background attributed")
     }
     
     func testKarn() {
         let str = "StringStylizer".stylize().karn(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSKernAttributeName: 1])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has karn attributed")
     }
     
     func testUnderline() {
         let str = "StringStylizer".stylize().underline(.StyleSingle).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSUnderlineStyleAttributeName:  NSUnderlineStyle.StyleSingle.rawValue])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has underline attributed")
     }
 
     func testUnderlineNoneParam() {
         let str = "StringStylizer".stylize().underline().attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSUnderlineStyleAttributeName:  NSUnderlineStyle.StyleSingle.rawValue])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has underline attributed")
     }
 
     func testStrokeParam() {
         let str = "StringStylizer".stylize().stroke(color: .whiteColor()).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSStrokeColorAttributeName:  UIColor.whiteColor(),
             NSStrokeWidthAttributeName: 1.0])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has stroke attributed")
     }
     
     func testStrokeThroghParam() {
         let str = "StringStylizer".stylize().strokeThrogh(.StyleDouble).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSStrikethroughStyleAttributeName:  NSUnderlineStyle.StyleDouble.rawValue])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has strokeThrogh attributed")
     }
     
     func testStrokeThroghBlankParam() {
         let str = "StringStylizer".stylize().strokeThrogh().attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSStrikethroughStyleAttributeName:  NSUnderlineStyle.StyleSingle.rawValue])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has strokeThrogh attributed")
     }
     
     func testShadowParam() {
         let shadow = NSShadow()
         let str = "StringStylizer".stylize().shadow(shadow).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSShadowAttributeName:  shadow])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has shadow attributed")
     }
     
     func testLigetureParam() {
         let str = "StringStylizer".stylize().ligeture(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSLigatureAttributeName:  1])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has ligeture attributed")
     }
     
     func testBaselineParam() {
         let str = "StringStylizer".stylize().baselineOffset(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSBaselineOffsetAttributeName:  1])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has baselineOffset attributed")
     }
     
     func testLinkParam() {
         let url = NSURL(string: "")!
         let str = "StringStylizer".stylize().link(url).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSLinkAttributeName: url])
-        XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+        XCTAssert(str.isEqualToAttributedString(expected), "has link attribute")
     }
     
     func testParagraphParam() {
@@ -123,6 +123,111 @@ class StringStylizerTests: XCTestCase {
         let str = "StringStylizer".stylize().paragraph(paragraph).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: paragraph])
         XCTAssert(str.isEqualToAttributedString(expected), "has color attributed")
+    }
+    
+    func testPartialRange() {
+        let str = "StringStylizer".stylize().range(5..<UInt.max).color(.whiteColor()).attr
+        
+        let expected = NSMutableAttributedString(string: "StringStylizer")
+        expected.addAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], range: NSRange(5..<str.length))
+        XCTAssert(str.isEqualToAttributedString(expected), "has correct partial range")
+    }
+    
+    func testTwoPartialRanges() {
+        let str = "StringStylizer".stylize()
+            .range(5..<UInt.max).color(.whiteColor())
+            .range(1..<4).size(14).attr
+        
+        let expected = NSMutableAttributedString(string: "StringStylizer")
+        expected.addAttributes(
+            [NSForegroundColorAttributeName: UIColor.whiteColor()],
+            range: NSRange(5..<str.length)
+        )
+        expected.addAttributes(
+            [NSFontAttributeName: UIFont.systemFontOfSize(14)],
+            range: NSRange(1..<4)
+        )
+
+        XCTAssert(str.isEqualToAttributedString(expected), "has correct partial range")
+    }
+    
+    func testConcatenateTwoAttributedString() {
+        let str = "String"  .stylize().range(5..<UInt.max).color(.whiteColor()).attr +
+                  "Stylizer".stylize().range(1..<4).size(14).attr
+        
+        let expectedHead = NSMutableAttributedString(string: "String")
+        expectedHead.addAttributes(
+            [NSForegroundColorAttributeName: UIColor.whiteColor()],
+            range: NSRange(5..<"String".characters.count)
+        )
+        let expectedTail = NSMutableAttributedString(string: "Stylizer")
+        expectedTail.addAttributes(
+            [NSFontAttributeName: UIFont.systemFontOfSize(14)],
+            range: NSRange(1..<4)
+        )
+        expectedHead.appendAttributedString(expectedTail)
+        
+        XCTAssert(str.isEqualToAttributedString(expectedHead), "has joind Attribute")
+    }
+    
+    func testParagraphAlignment() {
+        let str = "StringStylizer".stylize().paragraphAlignment(.Right).attr
+        
+        let style = NSMutableParagraphStyle()
+        style.alignment = .Right
+        let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: style])
+
+        XCTAssert(str.isEqualToAttributedString(expcted), "has paragraph Alinment")
+    }
+    
+    func testParagraphIndent() {
+        let str = "StringStylizer".stylize().paragraphIndent(firstLineHead: 10, tail: 10, otherHead: 10).attr
+        
+        let style = NSMutableParagraphStyle()
+        style.firstLineHeadIndent = 10
+        style.headIndent = 10
+        style.tailIndent = 10
+        let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: style])
+        XCTAssert(str.isEqualToAttributedString(expcted), "has paragraph Indent")
+    }
+    
+    func testParagraphLineBreak() {
+        let str = "StringStylizer".stylize().paragraphLineBreak(.ByCharWrapping).attr
+        
+        let style = NSMutableParagraphStyle()
+        style.lineBreakMode = .ByCharWrapping
+        let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: style])
+        XCTAssert(str.isEqualToAttributedString(expcted), "has paragraph line break")
+    }
+    
+    func testParagraphLineHeight() {
+        let str = "StringStylizer".stylize().paragraphLineHeight(maximum: 10, minimum: 10, multiple: 1.0).attr
+        
+        let style = NSMutableParagraphStyle()
+        style.maximumLineHeight = 10
+        style.minimumLineHeight = 10
+        style.lineHeightMultiple = 1.0
+        let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: style])
+        XCTAssert(str.isEqualToAttributedString(expcted), "has paragraph line height")
+    }
+
+    func testParagraphLineSpace() {
+        let str = "StringStylizer".stylize().paragraphLineSpacing(after: 10, before: 10).attr
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 10
+        style.paragraphSpacingBefore = 10
+        let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: style])
+        XCTAssert(str.isEqualToAttributedString(expcted), "has paragraph spacing before")
+    }
+
+    func testParagraphBaseWritingDirection() {
+        let str = "StringStylizer".stylize().paragraphBaseWritingDirection(NSWritingDirection.RightToLeft).attr
+        
+        let style = NSMutableParagraphStyle()
+        style.baseWritingDirection = .RightToLeft
+        let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [NSParagraphStyleAttributeName: style])
+        XCTAssert(str.isEqualToAttributedString(expcted), "has paragraph Indent")
     }
     
     // MARK:- private
