@@ -385,15 +385,15 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
 
      - returns: StringStylizer<Styling>
      */
-    public func shadow(offset offset: (width: Double, height: Double)? = nil, rgb: UInt? = nil, alpha: Double = 0.3, blurRadius: Double? = nil) -> StringStylizer<Styling> {
+    public func shadow(offset offset: (width: Double, height: Double)? = nil, color: UIColor? = nil, blurRadius: Double? = nil) -> StringStylizer<Styling> {
         let shadow = NSShadow()
-        
+
         if let offset = offset {
             shadow.shadowOffset = CGSizeMake(CGFloat(offset.width), CGFloat(offset.height))
         }
         
-        if let rgb = rgb {
-            shadow.shadowColor = self.rgb(rgb, alpha: alpha)
+        if let color = color {
+            shadow.shadowColor = color
         }
         
         if let blurRadius = blurRadius {
