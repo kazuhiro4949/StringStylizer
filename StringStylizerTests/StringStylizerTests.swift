@@ -99,6 +99,34 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqualToAttributedString(expected), "has shadow attributed")
     }
     
+    func testShadowPropertyParam() {
+        let str = "StringStylizer".stylize().shadow(offset: (10, 10), color: UIColor.redColor(), blurRadius: 1.0).attr
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSizeMake(10, 10)
+        shadow.shadowColor = UIColor.redColor()
+        shadow.shadowBlurRadius = 1.0
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [NSShadowAttributeName:  shadow])
+        XCTAssert(str.isEqualToAttributedString(expected), "has shadow attributed")
+    }
+
+    
+    func testShadowPropertyParamNoAplphaAndBlurRadius() {
+        let str = "StringStylizer".stylize().shadow(offset: (10, 10), color: UIColor.redColor()).attr
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSizeMake(10, 10)
+        shadow.shadowColor = UIColor.redColor()
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [NSShadowAttributeName:  shadow])
+        XCTAssert(str.isEqualToAttributedString(expected), "has shadow attributed")
+    }
+    
+    func testShadowPropertyParamNoAplphaAndBlurRadiusAndColor() {
+        let str = "StringStylizer".stylize().shadow(offset: (10, 10)).attr
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSizeMake(10, 10)
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [NSShadowAttributeName:  shadow])
+        XCTAssert(str.isEqualToAttributedString(expected), "has shadow attributed")
+    }
+    
     func testLigetureParam() {
         let str = "StringStylizer".stylize().ligeture(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSLigatureAttributeName:  1])

@@ -104,8 +104,11 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     ### example
      
     ```
-    "StringStylizer".stylize().color(.redColor()).attr
-    ```
+    
+     
+     "StringStylizer".stylize().color(.redColor()).attr
+    `
+     ``
     <img width="143" src="https://cloud.githubusercontent.com/assets/18320004/14388487/52403352-fde9-11e5-86fe-f94224dcc747.png">
      
     - parameter rgb:UInt
@@ -124,7 +127,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().color(0xff0000).attr
+     
      ```
      <img width="143" src="https://cloud.githubusercontent.com/assets/18320004/14388487/52403352-fde9-11e5-86fe-f94224dcc747.png">
      
@@ -142,7 +148,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().font(UIFont(name: "Copperplate-Light", size: 17)!).attr
+     
      ```
      <img width="163" src="https://cloud.githubusercontent.com/assets/18320004/14388742/6986057c-fdea-11e5-9814-5a610684de0b.png">
      
@@ -160,7 +169,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().font("Copperplate-Light").attr
+     
      ```
      <img width="147" src="https://cloud.githubusercontent.com/assets/18320004/14388776/a274bf68-fdea-11e5-9634-840d0b5fdacb.png">
      
@@ -185,7 +197,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().font(.Copperplate_Light).attr
+     
      ```
      <img width="147" src="https://cloud.githubusercontent.com/assets/18320004/14388776/a274bf68-fdea-11e5-9634-840d0b5fdacb.png">
      
@@ -210,7 +225,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().font(.Copperplate_Light).attr
+     
      ```
      <img width="153" src="https://cloud.githubusercontent.com/assets/18320004/14388859/16328002-fdeb-11e5-99d7-2687525b5e3d.png">
      
@@ -235,7 +253,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().background(0xff0000, alpha: 0.5).attr
+     
      ```
      <img width="153" src="https://cloud.githubusercontent.com/assets/18320004/14388921/4a685702-fdeb-11e5-8005-efe8024beeb9.png">
      
@@ -254,7 +275,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().karn(5).attr
+     
      ```
      <img width="210" src="https://cloud.githubusercontent.com/assets/18320004/14388994/94d50894-fdeb-11e5-9e78-7c31480bb00c.png">
      
@@ -272,7 +296,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().underline(.StyleSingle, rgb: 0xff0000, alpha: 0.5).attr
+     
      ```
      <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389065/db66f77c-fdeb-11e5-8182-de300c85dc0e.png">
      
@@ -298,7 +325,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().stroke(rgb: 0xff0000, alpha: 1, width: 2).attr
+     
      ```
      <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389200/7fca9c74-fdec-11e5-996b-3ead1ac564cc.png">
      
@@ -318,7 +348,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().stroke(color: .redColor(), alpha: 1, width: 2).attr
+     
      ```
      <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389200/7fca9c74-fdec-11e5-996b-3ead1ac564cc.png">
      
@@ -339,7 +372,10 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      ### example
      ```
+     
+     
      "StringStylizer".stylize().strokeThrogh(.StyleDouble, rgb: 0xff0000, alpha: 1).attr
+     
      ```
      <img width="139" src="https://cloud.githubusercontent.com/assets/18320004/14389273/ddc222f2-fdec-11e5-9a80-0181383ef553.png">
      
@@ -364,11 +400,62 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     /**
      The value of NSShadowAttributeName
      
+     ### example
+     ```
+     let shadow = NSShadow()
+     shadow.shadowOffset = CGSizeMake(1, 1)
+     shadow.shadowColor = .redColor()
+     shadow.shadowBlurRadius = 2
+     "StringStylizer".stylize().shadow(shadow).attr
+     ```
+     <img width="138" alt="2016-04-10 18 35 27" src="https://cloud.githubusercontent.com/assets/18320004/14409343/ef91361c-ff4a-11e5-9c79-23e42a07ce81.png">
+     
      - parameter value:NSShadow
      - returns: StringStylizer<Styling>
      */
     public func shadow(value: NSShadow) -> StringStylizer<Styling> {
         _attributes[NSShadowAttributeName] = value
+        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
+        return stylizer
+    }
+    
+    /**
+     The value of NSShadowAttributeName. 
+     
+     Arguments are offset, rgb, alpha, blurRadius to make NSShadow
+     
+     ### example
+     ```
+     
+     
+     "StringStylizer".stylize().shadow(offset: (1, 1), color: .redColor(), blurRadius: 2).attr
+     
+     ```
+     <img width="138" alt="2016-04-10 18 35 27" src="https://cloud.githubusercontent.com/assets/18320004/14409343/ef91361c-ff4a-11e5-9c79-23e42a07ce81.png">
+     
+     - parameter offset:(width: Double, height: Double)? offset (default is nil)
+     - parameter rgb:UInt? Color with rgb (default is nil)
+     - parameter alpha:Double Alpha (default is 1)
+     - parameter blurRadius:Double BlurRadius (default is 0.3)
+
+     - returns: StringStylizer<Styling>
+     */
+    public func shadow(offset offset: (width: Double, height: Double)? = nil, color: UIColor? = nil, blurRadius: Double? = nil) -> StringStylizer<Styling> {
+        let shadow = NSShadow()
+
+        if let offset = offset {
+            shadow.shadowOffset = CGSizeMake(CGFloat(offset.width), CGFloat(offset.height))
+        }
+        
+        if let color = color {
+            shadow.shadowColor = color
+        }
+        
+        if let blurRadius = blurRadius {
+            shadow.shadowBlurRadius = CGFloat(blurRadius)
+        }
+        
+        _attributes[NSShadowAttributeName] = shadow
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
