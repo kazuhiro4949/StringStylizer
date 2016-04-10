@@ -374,6 +374,38 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     }
     
     /**
+     The value of NSShadowAttributeName. 
+     
+     Arguments are offset, rgb, alpha, blurRadius to make NSShadow
+     
+     - parameter offset:(width: Double, height: Double)? offset (default is nil)
+     - parameter rgb:UInt? Color with rgb (default is nil)
+     - parameter alpha:Double Alpha (default is 1)
+     - parameter blurRadius:Double BlurRadius (default is 0.3)
+
+     - returns: StringStylizer<Styling>
+     */
+    public func shadow(offset offset: (width: Double, height: Double)? = nil, rgb: UInt? = nil, alpha: Double = 0.3, blurRadius: Double? = nil) -> StringStylizer<Styling> {
+        let shadow = NSShadow()
+        
+        if let offset = offset {
+            shadow.shadowOffset = CGSizeMake(CGFloat(offset.width), CGFloat(offset.height))
+        }
+        
+        if let rgb = rgb {
+            shadow.shadowColor = self.rgb(rgb, alpha: alpha)
+        }
+        
+        if let blurRadius = blurRadius {
+            shadow.shadowBlurRadius = CGFloat(blurRadius)
+        }
+        
+        _attributes[NSShadowAttributeName] = shadow
+        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
+        return stylizer
+    }
+    
+    /**
      The value of NSLigatureAttributeName
      
      - parameter value:Int
