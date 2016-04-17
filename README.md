@@ -97,10 +97,12 @@ end
 
 target 'MyAppUITests'
 ```
+
 + Install
-``
+
+```
 > pod install
-``
+```
 open .xcworkspace
 
 ## Example
