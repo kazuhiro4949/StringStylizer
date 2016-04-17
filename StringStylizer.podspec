@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "StringStylizer"
-  s.version          = "v1.1"
+  s.version          = "1.1.1"
   s.summary          = "Type strict builder class for NSAttributedString."
 
   s.description      = <<-DESC
