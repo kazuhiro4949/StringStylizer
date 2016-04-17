@@ -1,6 +1,7 @@
 # StringStylizer
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![Cocoapods compatible](https://cocoapod-badges.herokuapp.com/v/StringStylizer/1.1.1/badge.png)
 
 Type strict builder class for [NSAttributedString](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSAttributedString_Class/). 
 
@@ -34,6 +35,8 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 - Swift 2.0+
 
 ## Installation
+### Carthage
+
 + Install Carthage from Homebrew
 ```
 > ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -67,6 +70,38 @@ $(SRCROOT)/Carthage/Build/iOS/StringStylizer.framework
 ```
 Import StringStylizer
 ```
+
+### CocoaPods
++ Install CocoaPods
+```
+> gem install cocoapods
+> pod setup
+```
++ Create Podfile
+```
+> pod init
+```
++ Edit Podfile
+```ruby
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'  # add
+use_framework!  # add
+
+target 'MyAppName' do
+  pod 'StringStylizer' # add
+end
+
+target 'MyAppTests' do
+
+end
+
+target 'MyAppUITests'
+```
++ Install
+``
+> pod install
+``
+open .xcworkspace
 
 ## Example
  
