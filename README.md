@@ -133,7 +133,7 @@ Of course, you can wrap up the method chains.
 ```swift
 extension StringStylizer {
   func strong() -> NSAttributedString {
-    return self.stylize()
+    return self
             .color(0x123456)
             .size(14)
             .font(.HelveticaNeue_Italic)
