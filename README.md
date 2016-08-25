@@ -180,6 +180,13 @@ Because of them, we are able to
 - write our code in a liner manner
 - call proper methods depending on the situation.
 
+## Support Future Swift Versions
+This repository has two specific branches.
+- support_swift2.3
+- support_swift3
+
+They are supporting future swift versions. I will merge them to master branch when the versions are officialy released.
+
 ## License
 
 Copyright (c) 2016 Kazuhiro Hayashi
