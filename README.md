@@ -174,7 +174,7 @@ That's it!
 ## Architecture
 StringStylizer is based on **"Builder Pattern"** (Effective Java version). In addition, it has states managed by **"Phantom Type"**.
 
-<img width="800" src="https://cloud.githubusercontent.com/assets/18266814/14271674/4d5bb9de-fb36-11e5-819c-cb2061d49be4.png">
+<img width="800" src="https://cloud.githubusercontent.com/assets/18320004/18075348/f038fec8-6eae-11e6-8e9c-98c0fa39bcde.png">
 
 Because of them, we are able to
 - write our code in a liner manner
