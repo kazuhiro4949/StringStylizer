@@ -32,7 +32,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 
 ## Requirements
 - iOS 8.0+
-- Swift 2.0+
+- Swift 2.3+
 
 ## Installation
 ### Carthage
@@ -182,7 +182,7 @@ Because of them, we are able to
 
 ## Support Future Swift Versions
 This repository has two specific branches.
-- support_swift2.3
+- ~~support_swift2.3~~ (Already Supported)
 - support_swift3
 
 They are supporting future swift versions. I will merge them to master branch when the versions are officialy released.
