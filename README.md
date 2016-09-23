@@ -32,7 +32,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 
 ## Requirements
 - iOS 8.0+
-- Swift 2.0+
+- Swift 2.3+
 
 ## Installation
 ### Carthage
@@ -174,7 +174,7 @@ That's it!
 ## Architecture
 StringStylizer is based on **"Builder Pattern"** (Effective Java version). In addition, it has states managed by **"Phantom Type"**.
 
-<img width="800" src="https://cloud.githubusercontent.com/assets/18266814/14271674/4d5bb9de-fb36-11e5-819c-cb2061d49be4.png">
+<img width="800" src="https://cloud.githubusercontent.com/assets/18320004/18075348/f038fec8-6eae-11e6-8e9c-98c0fa39bcde.png">
 
 Because of them, we are able to
 - write our code in a liner manner
@@ -182,7 +182,7 @@ Because of them, we are able to
 
 ## Support Future Swift Versions
 This repository has two specific branches.
-- support_swift2.3
+- ~~support_swift2.3~~ (Already Supported)
 - support_swift3
 
 They are supporting future swift versions. I will merge them to master branch when the versions are officialy released.
