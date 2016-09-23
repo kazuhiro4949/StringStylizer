@@ -56,17 +56,17 @@ import UIKit
  <img width="261" src="https://cloud.githubusercontent.com/assets/18266814/14254571/49882d08-facb-11e5-9e3d-c37cbef6a003.png">
 
  */
-public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
+open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     public typealias ExtendedGraphemeClusterLiteralType = String
     public typealias UnicodeScalarLiteralType = String
     
-    private var _attrString: NSAttributedString
-    private var _attributes = [String: AnyObject]()
-    private var _range: Range<UInt>
+    fileprivate var _attrString: NSAttributedString
+    fileprivate var _attributes = [String: AnyObject]()
+    fileprivate var _range: CountableRange<UInt>
     
     // MARK:- Initializer
     
-    init(string: String, range: Range<UInt>? = nil, attributes: [String: AnyObject] = [String: AnyObject]()) {
+    init(string: String, range: CountableRange<UInt>? = nil, attributes: [String: AnyObject] = [String: AnyObject]()) {
         let range = range ?? 0..<UInt(string.characters.count)
         
         _attrString = NSAttributedString(string: string)
@@ -74,7 +74,7 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
         _range = range
     }
     
-    init(attributedString: NSAttributedString, range: Range<UInt>, attributes: [String: AnyObject] = [String: AnyObject]()) {
+    init(attributedString: NSAttributedString, range: CountableRange<UInt>, attributes: [String: AnyObject] = [String: AnyObject]()) {
         _attrString = attributedString
         _attributes = attributes
         _range = range
@@ -115,7 +115,7 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
     - parameter alpha:Double (default: 1.0)
     - returns: StringStylizer<Styling>
     */
-    public func color(rgb: UInt, alpha: Double = 1.0) -> StringStylizer<Styling> {
+    open func color(_ rgb: UInt, alpha: Double = 1.0) -> StringStylizer<Styling> {
         _attributes[NSForegroundColorAttributeName] = self.rgb(rgb, alpha: alpha)
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -137,7 +137,7 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter color:UIColor
      - returns: StringStylizer<Styling>
      */
-    public func color(color: UIColor) -> StringStylizer<Styling> {
+    open func color(_ color: UIColor) -> StringStylizer<Styling> {
         _attributes[NSForegroundColorAttributeName] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -158,7 +158,7 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter font:UIFont
      - returns: StringStylizer<Styling>
      */
-    public func font(font: UIFont) -> StringStylizer<Styling> {
+    open func font(_ font: UIFont) -> StringStylizer<Styling> {
         _attributes[NSFontAttributeName] = font
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -179,12 +179,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter name:String
      - returns: StringStylizer<Styling>
      */
-    public func font(name: String) -> StringStylizer<Styling> {
+    open func font(_ name: String) -> StringStylizer<Styling> {
         let font: UIFont
         if let currentFont = _attributes[NSFontAttributeName] as? UIFont {
             font = UIFont(name: name, size: currentFont.pointSize) ?? UIFont()
         } else {
-            font = UIFont(name: name, size: UIFont.systemFontSize()) ?? UIFont()
+            font = UIFont(name: name, size: UIFont.systemFontSize) ?? UIFont()
         }
         
         _attributes[NSFontAttributeName] = font
@@ -207,12 +207,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter name:StringStylizerFontName
      - returns: StringStylizer<Styling>
      */
-    public func font(name: StringStylizerFontName) -> StringStylizer<Styling> {
+    open func font(_ name: StringStylizerFontName) -> StringStylizer<Styling> {
         let font: UIFont
         if let currentFont = _attributes[NSFontAttributeName] as? UIFont {
             font = UIFont(name: name.rawValue, size: currentFont.pointSize) ?? UIFont()
         } else {
-            font = UIFont(name: name.rawValue, size: UIFont.systemFontSize()) ?? UIFont()
+            font = UIFont(name: name.rawValue, size: UIFont.systemFontSize) ?? UIFont()
         }
         
         _attributes[NSFontAttributeName] = font
@@ -235,12 +235,12 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter size:Double
      - returns: StringStylizer<Styling>
      */
-    public func size(size: Double) -> StringStylizer<Styling> {
+    open func size(_ size: Double) -> StringStylizer<Styling> {
         let font: UIFont
         if let currentFont = _attributes[NSFontAttributeName] as? UIFont {
             font = UIFont(name: currentFont.fontName, size: CGFloat(size)) ?? UIFont()
         } else {
-            font = UIFont.systemFontOfSize(CGFloat(size))
+            font = UIFont.systemFont(ofSize: CGFloat(size))
         }
         
         _attributes[NSFontAttributeName] = font
@@ -264,7 +264,7 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    public func background(rgb: UInt, alpha: Double = 1.0) -> StringStylizer<Styling> {
+    open func background(_ rgb: UInt, alpha: Double = 1.0) -> StringStylizer<Styling> {
         _attributes[NSBackgroundColorAttributeName] = self.rgb(rgb, alpha: alpha)
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -285,8 +285,8 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter value:Double
      - returns: StringStylizer<Styling>
      */
-    public func karn(value: Double) -> StringStylizer<Styling> {
-        _attributes[NSKernAttributeName] = value
+    open func karn(_ value: Double) -> StringStylizer<Styling> {
+        _attributes[NSKernAttributeName] = value as AnyObject?
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -308,13 +308,13 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    public func underline(style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling> {
-        let _style: [NSUnderlineStyle] = style.isEmpty ? [.StyleSingle] : style
+    open func underline(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling> {
+        let _style: [NSUnderlineStyle] = style.isEmpty ? [.styleSingle] : style
         
         let value = _style.reduce(0) { (sum, elem) -> Int in
             return sum | elem.rawValue
         }
-        _attributes[NSUnderlineStyleAttributeName] = value
+        _attributes[NSUnderlineStyleAttributeName] = value as AnyObject?
         _attributes[NSUnderlineColorAttributeName] = rgb.flatMap { self.rgb($0, alpha: alpha) }
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -336,8 +336,8 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    public func stroke(rgb rgb: UInt, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
-        _attributes[NSStrokeWidthAttributeName] = width
+    open func stroke(rgb: UInt, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
+        _attributes[NSStrokeWidthAttributeName] = width as AnyObject?
         _attributes[NSStrokeColorAttributeName] = self.rgb(rgb, alpha: alpha)
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -360,8 +360,8 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter width:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    public func stroke(color color: UIColor, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
-        _attributes[NSStrokeWidthAttributeName] = width
+    open func stroke(color: UIColor, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
+        _attributes[NSStrokeWidthAttributeName] = width as AnyObject?
         _attributes[NSStrokeColorAttributeName] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -384,14 +384,14 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    public func strokeThrogh(style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
-        let _style: [NSUnderlineStyle] = style.isEmpty ? [.StyleSingle] : style
+    open func strokeThrogh(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
+        let _style: [NSUnderlineStyle] = style.isEmpty ? [.styleSingle] : style
         
         let value = _style.reduce(0) { (sum, elem) -> Int in
             return sum | elem.rawValue
         }
         
-        _attributes[NSStrikethroughStyleAttributeName] = value
+        _attributes[NSStrikethroughStyleAttributeName] = value as AnyObject?
         _attributes[NSStrikethroughColorAttributeName] = rgb.flatMap { self.rgb($0, alpha: alpha) }
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -413,7 +413,7 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter value:NSShadow
      - returns: StringStylizer<Styling>
      */
-    public func shadow(value: NSShadow) -> StringStylizer<Styling> {
+    open func shadow(_ value: NSShadow) -> StringStylizer<Styling> {
         _attributes[NSShadowAttributeName] = value
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -440,11 +440,11 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
 
      - returns: StringStylizer<Styling>
      */
-    public func shadow(offset offset: (width: Double, height: Double)? = nil, color: UIColor? = nil, blurRadius: Double? = nil) -> StringStylizer<Styling> {
+    open func shadow(offset: (width: Double, height: Double)? = nil, color: UIColor? = nil, blurRadius: Double? = nil) -> StringStylizer<Styling> {
         let shadow = NSShadow()
 
         if let offset = offset {
-            shadow.shadowOffset = CGSizeMake(CGFloat(offset.width), CGFloat(offset.height))
+            shadow.shadowOffset = CGSize(width: CGFloat(offset.width), height: CGFloat(offset.height))
         }
         
         if let color = color {
@@ -466,8 +466,8 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter value:Int
      - returns: StringStylizer<Styling>
      */
-    public func ligeture(value: Int) -> StringStylizer<Styling> {
-        _attributes[NSLigatureAttributeName] = value
+    open func ligeture(_ value: Int) -> StringStylizer<Styling> {
+        _attributes[NSLigatureAttributeName] = value as AnyObject?
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -478,8 +478,8 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter url:NSURL
      - returns: StringStylizer<Styling>
      */
-    public func link(url: NSURL) -> StringStylizer<Styling> {
-        _attributes[NSLinkAttributeName] = url
+    open func link(_ url: URL) -> StringStylizer<Styling> {
+        _attributes[NSLinkAttributeName] = url as AnyObject?
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -490,8 +490,8 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      - parameter value:Double
      - returns: StringStylizer<Styling>
      */
-    public func baselineOffset(value: Double) -> StringStylizer<Styling> {
-        _attributes[NSBaselineOffsetAttributeName] = value
+    open func baselineOffset(_ value: Double) -> StringStylizer<Styling> {
+        _attributes[NSBaselineOffsetAttributeName] = value as AnyObject?
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -501,13 +501,13 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
      
      - returns: Int
      */
-    public var count: Int {
+    open var count: Int {
         return _attrString.length
     }
     
     // MARK:- private
     
-    private func rgb(rgb: UInt, alpha: Double) -> UIColor {
+    fileprivate func rgb(_ rgb: UInt, alpha: Double) -> UIColor {
         return UIColor(
             red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
@@ -518,13 +518,13 @@ public class StringStylizer<T: StringStylizerStatus>: StringLiteralConvertible {
 }
 
 public extension StringStylizer {
-    public func paragraph(style: NSParagraphStyle) -> StringStylizer<Styling> {
+    public func paragraph(_ style: NSParagraphStyle) -> StringStylizer<Styling> {
         _attributes[NSParagraphStyleAttributeName] = style
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
 
-    public func paragraphAlignment(alignment: NSTextAlignment) -> StringStylizer<Styling> {
+    public func paragraphAlignment(_ alignment: NSTextAlignment) -> StringStylizer<Styling> {
         let style: NSMutableParagraphStyle
         if let currentStyle = _attributes[NSParagraphStyleAttributeName] as? NSMutableParagraphStyle {
             currentStyle.alignment = alignment
@@ -539,7 +539,7 @@ public extension StringStylizer {
         return stylizer
     }
 
-    public func paragraphIndent(firstLineHead firstLineHead: CGFloat? = nil, tail: CGFloat? = nil, otherHead: CGFloat? = nil) -> StringStylizer<Styling> {
+    public func paragraphIndent(firstLineHead: CGFloat? = nil, tail: CGFloat? = nil, otherHead: CGFloat? = nil) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         
         if let firstLineHead = firstLineHead {
@@ -559,7 +559,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphLineBreak(lineBreakMode: NSLineBreakMode) -> StringStylizer<Styling> {
+    public func paragraphLineBreak(_ lineBreakMode: NSLineBreakMode) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         style.lineBreakMode = lineBreakMode
         
@@ -568,7 +568,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphLineHeight(maximum maximum: CGFloat? = nil, minimum: CGFloat? = nil, multiple: CGFloat? = nil) -> StringStylizer<Styling> {
+    public func paragraphLineHeight(maximum: CGFloat? = nil, minimum: CGFloat? = nil, multiple: CGFloat? = nil) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         
         if let maximum = maximum {
@@ -588,7 +588,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphLineSpacing(after after: CGFloat? = nil, before: CGFloat? = nil) -> StringStylizer<Styling> {
+    public func paragraphLineSpacing(after: CGFloat? = nil, before: CGFloat? = nil) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         
         if let after = after {
@@ -604,7 +604,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphBaseWritingDirection(baseWritingDirection: NSWritingDirection) -> StringStylizer<Styling> {
+    public func paragraphBaseWritingDirection(_ baseWritingDirection: NSWritingDirection) -> StringStylizer<Styling> {
         let style: NSMutableParagraphStyle
         if let currentStyle = _attributes[NSParagraphStyleAttributeName] as? NSMutableParagraphStyle {
             style = currentStyle
@@ -619,7 +619,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    private func getParagraphStyle() -> NSMutableParagraphStyle {
+    fileprivate func getParagraphStyle() -> NSMutableParagraphStyle {
         if let currentStyle = _attributes[NSParagraphStyleAttributeName] as? NSMutableParagraphStyle {
             return currentStyle
         } else {
@@ -631,7 +631,7 @@ public extension StringStylizer {
 public extension StringStylizer where  T: Styling {
     /// generates NSAttributedString
     public var attr: NSAttributedString {
-        let range = Int(_range.startIndex)..<Int(_range.endIndex)
+        let range: Range = Int(_range.startIndex)..<Int(_range.endIndex)
         let attrString = NSMutableAttributedString(attributedString: _attrString)
         attrString.setAttributes(_attributes, range: NSRange(range))
         return attrString
@@ -643,7 +643,7 @@ public extension StringStylizer where  T: Styling {
      - parameter range:Range (default: nil)
      - returns: StringStylizer<NarrowDown>
      */
-    public func range(range: Range<UInt>? = nil) -> StringStylizer<NarrowDown> {
+    public func range(_ range: CountableRange<UInt>? = nil) -> StringStylizer<NarrowDown> {
         let attrString = NSMutableAttributedString(attributedString: _attrString)
         attrString.setAttributes(_attributes, range: NSRange(Int(_range.startIndex)..<Int(_range.endIndex)))
         
