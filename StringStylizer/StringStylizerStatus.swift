@@ -24,6 +24,6 @@
 
 import Foundation
 
-public class StringStylizerStatus {}
-public class Styling: StringStylizerStatus {}
-public class NarrowDown: StringStylizerStatus {}
+open class StringStylizerStatus {}
+open class Styling: StringStylizerStatus {}
+open class NarrowDown: StringStylizerStatus {}
