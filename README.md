@@ -32,7 +32,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 
 ## Requirements
 - iOS 8.0+
-- Swift 2.3+
+- Swift 3.0 or Swift 2.3 (swift2.3 branch)
 
 ## Installation
 ### Carthage
@@ -180,12 +180,9 @@ Because of them, we are able to
 - write our code in a liner manner
 - call proper methods depending on the situation.
 
-## Support Future Swift Versions
-This repository has two specific branches.
-- ~~support_swift2.3~~ (Already Supported)
-- support_swift3
+## Swift 2.3 & 3.0 Migration Guide
 
-They are supporting future swift versions. I will merge them to master branch when the versions are officialy released.
+[Current master branch](https://github.com/yahoojapan/SwiftyXMLParser/tree/master) and [the latest release package](https://github.com/yahoojapan/SwiftyXMLParser/releases/tag/3.0.0) is supporting Xcode8. You can install Swift 3.0 package in the usual process. If you wanna install Swift 2.3 branch, pull [swift2.3 branch](https://github.com/yahoojapan/SwiftyXMLParser/tree/swift2.3) or install version [2.3.0](https://github.com/yahoojapan/SwiftyXMLParser/releases/tag/2.3.0).
 
 ## License
 
