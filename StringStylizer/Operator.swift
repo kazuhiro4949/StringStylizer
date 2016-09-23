@@ -35,7 +35,7 @@ import Foundation
  */
 public func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedString {
     let concat = NSMutableAttributedString()
-    concat.appendAttributedString(left)
-    concat.appendAttributedString(right)
+    concat.append(left)
+    concat.append(right)
     return concat
 }
