@@ -49,7 +49,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 ```
 + add the following line to Cartfile
 ```
-github "kazuhiro49/StringStylizer"
+github "kazuhiro4949/StringStylizer"
 ```
 + Create framework
 ```
