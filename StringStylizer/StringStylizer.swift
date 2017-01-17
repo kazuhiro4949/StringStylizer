@@ -98,7 +98,28 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     // MARK:- Attributes
     // https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSAttributedString_Class/index.html#//apple_ref/doc/c_ref/NSLinkAttributeName
     
-    /** 
+    /**
+    The value of NSForegroundColorAttributeName
+    
+    ### example
+     
+    ```
+    
+     
+     "StringStylizer".stylize().search("string").attr
+    ```
+     
+    - parameter rangeString: String
+    - returns: StringStylizer<Styling>
+    */
+    open func search(_ rangeString: String) -> StringStylizer<Styling> {
+        let nsrange = NSString(string: _attrString.string).range(of: rangeString)
+        let range = CountableRange<UInt>(uncheckedBounds: (lower: UInt(nsrange.location), upper: UInt(nsrange.location + nsrange.length)))
+        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: range, attributes: _attributes)
+        return stylizer
+    }
+
+    /**
     The value of NSForegroundColorAttributeName
     
     ### example
