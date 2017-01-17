@@ -160,6 +160,14 @@ class StringStylizerTests: XCTestCase {
         expected.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(5..<str.length))
         XCTAssert(str.isEqual(to: expected), "has correct partial range")
     }
+
+    func testPartialSearch() {
+        let str = "StringStylizer".stylize().search("ring").color(.white).attr
+        
+        let expected = NSMutableAttributedString(string: "StringStylizer")
+        expected.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(2..<4))
+        XCTAssert(str.isEqual(to: expected), "has correct partial range")
+    }
     
     func testTwoPartialRanges() {
         let str = "StringStylizer".stylize()
