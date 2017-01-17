@@ -106,27 +106,6 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     ```
     
      
-     "StringStylizer".stylize().search("string").attr
-    ```
-     
-    - parameter rangeString: String
-    - returns: StringStylizer<Styling>
-    */
-    open func search(_ rangeString: String) -> StringStylizer<Styling> {
-        let nsrange = NSString(string: _attrString.string).range(of: rangeString)
-        let range = CountableRange<UInt>(uncheckedBounds: (lower: UInt(nsrange.location), upper: UInt(nsrange.location + nsrange.length)))
-        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: range, attributes: _attributes)
-        return stylizer
-    }
-
-    /**
-    The value of NSForegroundColorAttributeName
-    
-    ### example
-     
-    ```
-    
-     
      "StringStylizer".stylize().color(.redColor()).attr
     `
      ``
@@ -673,4 +652,17 @@ public extension StringStylizer where  T: Styling {
         let validRange = range.startIndex..<endIndex
         return StringStylizer<NarrowDown>(attributedString: attrString, range: validRange)
     }
+
+    /**
+     set search to assign attributes
+
+     - parameter rangeString: String
+     - returns: StringStylizer<NarrowDown>
+    */
+    public func search(_ rangeString: String) -> StringStylizer<NarrowDown> {
+        let nsrange = NSString(string: _attrString.string).range(of: rangeString)
+        let range = CountableRange<UInt>(uncheckedBounds: (lower: UInt(nsrange.location), upper: UInt(nsrange.location + nsrange.length)))
+        return StringStylizer<NarrowDown>(attributedString: _attrString, range: range)
+    }
+
 }
