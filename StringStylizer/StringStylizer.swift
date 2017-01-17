@@ -98,7 +98,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     // MARK:- Attributes
     // https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSAttributedString_Class/index.html#//apple_ref/doc/c_ref/NSLinkAttributeName
     
-    /** 
+    /**
     The value of NSForegroundColorAttributeName
     
     ### example
@@ -652,4 +652,17 @@ public extension StringStylizer where  T: Styling {
         let validRange = range.startIndex..<endIndex
         return StringStylizer<NarrowDown>(attributedString: attrString, range: validRange)
     }
+
+    /**
+     set search to assign attributes
+
+     - parameter rangeString: String
+     - returns: StringStylizer<NarrowDown>
+    */
+    public func search(_ rangeString: String) -> StringStylizer<NarrowDown> {
+        let nsrange = NSString(string: _attrString.string).range(of: rangeString)
+        let range = CountableRange<UInt>(uncheckedBounds: (lower: UInt(nsrange.location), upper: UInt(nsrange.location + nsrange.length)))
+        return StringStylizer<NarrowDown>(attributedString: _attrString, range: range)
+    }
+
 }
