@@ -2,6 +2,8 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![Cocoapods compatible](https://cocoapod-badges.herokuapp.com/v/StringStylizer/1.1.1/badge.png)
+![Swift 3.0.x](https://img.shields.io/badge/Swift-3.0.x-orange.svg)
+
 
 Type strict builder class for [NSAttributedString](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSAttributedString_Class/). 
 
@@ -32,7 +34,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 
 ## Requirements
 - iOS 8.0+
-- Swift 2.0+
+- Swift 3.0 or Swift 2.3 (swift2.3 branch)
 
 ## Installation
 ### Carthage
@@ -49,7 +51,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 ```
 + add the following line to Cartfile
 ```
-github "kazuhiro49/StringStylizer"
+github "kazuhiro4949/StringStylizer"
 ```
 + Create framework
 ```
@@ -133,7 +135,7 @@ Of course, you can wrap up the method chains.
 ```swift
 extension StringStylizer {
   func strong() -> NSAttributedString {
-    return self.stylize()
+    return self
             .color(0x123456)
             .size(14)
             .font(.HelveticaNeue_Italic)
@@ -174,11 +176,15 @@ That's it!
 ## Architecture
 StringStylizer is based on **"Builder Pattern"** (Effective Java version). In addition, it has states managed by **"Phantom Type"**.
 
-<img width="800" src="https://cloud.githubusercontent.com/assets/18266814/14271674/4d5bb9de-fb36-11e5-819c-cb2061d49be4.png">
+<img width="800" src="https://cloud.githubusercontent.com/assets/18320004/18075348/f038fec8-6eae-11e6-8e9c-98c0fa39bcde.png">
 
 Because of them, we are able to
 - write our code in a liner manner
 - call proper methods depending on the situation.
+
+## Swift 2.3 & 3.0 Migration Guide
+
+[Current master branch](https://github.com/yahoojapan/SwiftyXMLParser/tree/master) and [the latest release package](https://github.com/yahoojapan/SwiftyXMLParser/releases/tag/3.0.0) is supporting Xcode8. You can install Swift 3.0 package in the usual process. If you wanna install Swift 2.3 branch, pull [swift2.3 branch](https://github.com/yahoojapan/SwiftyXMLParser/tree/swift2.3) or install version [2.3.0](https://github.com/yahoojapan/SwiftyXMLParser/releases/tag/2.3.0).
 
 ## License
 
