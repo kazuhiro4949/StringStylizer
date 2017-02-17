@@ -39,3 +39,15 @@ public func + (left: NSAttributedString, right: NSAttributedString) -> NSAttribu
     concat.append(right)
     return concat
 }
+
+/**
+ append NSAttributedString object
+
+ 
+ - paramter left:NSAttributedString
+ - paramter right:NSAttributedString
+ 
+ */
+public func += (left: inout NSAttributedString, right: NSAttributedString) {
+    left = left + right
+}

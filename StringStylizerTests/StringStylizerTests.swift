@@ -37,6 +37,19 @@ class StringStylizerTests: XCTestCase {
         super.tearDown()
     }
     
+    func testOperatorPlus() {
+        let str = "String".stylize().attr + "Stylizer".stylize().attr
+        let expected = NSAttributedString(string: "StringStylizer")
+        XCTAssert(str.isEqual(to: expected), "has + operator attributed")
+    }
+
+    func testOperatorPlusEqual() {
+        var str = "String".stylize().attr
+        str += "Stylizer".stylize().attr
+        let expected = NSAttributedString(string: "StringStylizer")
+        XCTAssert(str.isEqual(to: expected), "has += operator attributed")
+    }
+    
     func testColor() {
         let str = "StringStylizer".stylize().color(.white).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [NSForegroundColorAttributeName: UIColor.white])
