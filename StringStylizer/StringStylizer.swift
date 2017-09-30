@@ -286,7 +286,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func karn(_ value: Double) -> StringStylizer<Styling> {
-        _attributes[.kern] = value as AnyObject?
+        _attributes[.kern] = value as Any
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -314,7 +314,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
         let value = _style.reduce(0) { (sum, elem) -> Int in
             return sum | elem.rawValue
         }
-        _attributes[.underlineStyle] = value as AnyObject?
+        _attributes[.underlineStyle] = value as Any
         _attributes[.underlineColor] = rgb.flatMap { self.rgb($0, alpha: alpha) }
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -337,7 +337,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func stroke(rgb: UInt, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
-        _attributes[.strokeWidth] = width as AnyObject?
+        _attributes[.strokeWidth] = width as Any
         _attributes[.strokeColor] = self.rgb(rgb, alpha: alpha)
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -361,7 +361,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func stroke(color: UIColor, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
-        _attributes[.strokeWidth] = width as AnyObject?
+        _attributes[.strokeWidth] = width as Any
         _attributes[.strokeColor] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -391,7 +391,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
             return sum | elem.rawValue
         }
         
-        _attributes[.strikethroughStyle] = value as AnyObject?
+        _attributes[.strikethroughStyle] = value as Any
         _attributes[.strikethroughColor] = rgb.flatMap { self.rgb($0, alpha: alpha) }
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -467,7 +467,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func ligeture(_ value: Int) -> StringStylizer<Styling> {
-        _attributes[.ligature] = value as AnyObject?
+        _attributes[.ligature] = value as Any
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -479,7 +479,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func link(_ url: URL) -> StringStylizer<Styling> {
-        _attributes[.link] = url as AnyObject?
+        _attributes[.link] = url as Any
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -491,7 +491,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func baselineOffset(_ value: Double) -> StringStylizer<Styling> {
-        _attributes[.baselineOffset] = value as AnyObject?
+        _attributes[.baselineOffset] = value as Any
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
