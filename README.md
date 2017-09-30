@@ -182,10 +182,6 @@ Because of them, we are able to
 - write our code in a liner manner
 - call proper methods depending on the situation.
 
-## Swift 2.3 & 3.0 Migration Guide
-
-[Current master branch](https://github.com/yahoojapan/SwiftyXMLParser/tree/master) and [the latest release package](https://github.com/yahoojapan/SwiftyXMLParser/releases/tag/3.0.0) is supporting Xcode8. You can install Swift 3.0 package in the usual process. If you wanna install Swift 2.3 branch, pull [swift2.3 branch](https://github.com/yahoojapan/SwiftyXMLParser/tree/swift2.3) or install version [2.3.0](https://github.com/yahoojapan/SwiftyXMLParser/releases/tag/2.3.0).
-
 ## License
 
 Copyright (c) 2016 Kazuhiro Hayashi
