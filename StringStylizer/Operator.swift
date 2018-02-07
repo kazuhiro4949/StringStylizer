@@ -40,6 +40,14 @@ public func + (left: NSAttributedString, right: NSAttributedString) -> NSAttribu
     return concat
 }
 
+public func + (left: NSAttributedString, right: NSTextAttachment) -> NSAttributedString {
+    return left + NSAttributedString(attachment: right)
+}
+
+public func + (left: NSTextAttachment, right: NSTextAttachment) -> NSAttributedString {
+    return NSAttributedString(attachment: left) + right
+}
+
 /**
  append NSAttributedString object
 
