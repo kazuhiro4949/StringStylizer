@@ -627,6 +627,14 @@ public extension StringStylizer {
         return stylizer
     }
     
+    public func paragraphParagraphSpacing(_ spacing: CGFloat) -> StringStylizer<Styling> {
+        let style = getParagraphStyle()
+        style.paragraphSpacing = spacing
+        _attributes[.paragraphStyle] = style
+        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
+        return stylizer
+    }
+    
     fileprivate func getParagraphStyle() -> NSMutableParagraphStyle {
         if let currentStyle = _attributes[.paragraphStyle] as? NSMutableParagraphStyle {
             return currentStyle
