@@ -9,6 +9,11 @@
 import Foundation
 
 public extension UIImage {
+    
+    /// Instantiate NSTextAttachment from the uiimage object.
+    ///
+    /// - Parameter size: attachmented image size
+    /// - Returns: NSTextAttachment
     public func textAttachemnt(with size: CGSize) -> NSTextAttachment {
         let textAttachemnt = NSTextAttachment()
         textAttachemnt.image = self
@@ -16,6 +21,13 @@ public extension UIImage {
         return textAttachemnt
     }
     
+    
+    /// Instantiate NSTextAttachment from the uiimage object.
+    ///
+    /// - Parameters:
+    ///   - width: attachmented image width
+    ///   - height:  attachmented image height
+    /// - Returns: NSTextAttachment
     public func textAttachemnt(_ width: CGFloat, _ height: CGFloat) -> NSTextAttachment {
         let size = CGSize(width: width, height: height)
         return textAttachemnt(with: size)
