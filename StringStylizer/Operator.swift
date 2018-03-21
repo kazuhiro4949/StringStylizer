@@ -44,7 +44,7 @@ public func + (left: NSAttributedString, right: NSTextAttachment) -> NSAttribute
     return left + NSAttributedString(attachment: right)
 }
 
-public func + (left: NSTextAttachment, right: NSTextAttachment) -> NSAttributedString {
+public func + (left: NSTextAttachment, right: NSAttributedString) -> NSAttributedString {
     return NSAttributedString(attachment: left) + right
 }
 
