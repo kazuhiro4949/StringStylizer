@@ -14,8 +14,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        centerLabel.attributedText = "aaa".stylize().color(.red).attr
+        centerLabel.attributedText = "aaa".stylize().color(.red).attr + #imageLiteral(resourceName: "Attachment").textAttachemnt(17, 17)
     }
 
     override func didReceiveMemoryWarning() {

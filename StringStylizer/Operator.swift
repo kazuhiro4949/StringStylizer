@@ -22,8 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
-
+import UIKit
 /**
  combine two NSAttributedString object
  
@@ -50,4 +49,24 @@ public func + (left: NSAttributedString, right: NSAttributedString) -> NSAttribu
  */
 public func += (left: inout NSAttributedString, right: NSAttributedString) {
     left = left + right
+}
+
+/// combine two NSAttributedString and NSTextAttachment objects
+///
+/// - Parameters:
+///   - left: NSAttributedString
+///   - right: NSTextAttachment
+/// - Returns: combinded NSAttributedString
+public func + (left: NSAttributedString, right: NSTextAttachment) -> NSAttributedString {
+    return left + NSAttributedString(attachment: right)
+}
+
+/// combine two NSTextAttachment and NSAttributedString objects
+///
+/// - Parameters:
+///   - left: NSTextAttachment
+///   - right: NSAttributedString
+/// - Returns: combinded NSAttributedString
+public func + (left: NSTextAttachment, right: NSAttributedString) -> NSAttributedString {
+    return NSAttributedString(attachment: left) + right
 }
