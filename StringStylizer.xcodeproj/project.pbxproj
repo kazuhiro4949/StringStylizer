@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B3A7F8020629F1A008C4ED9 /* UIImage+StringStylizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A7F7F20629F1A008C4ED9 /* UIImage+StringStylizer.swift */; };
+		2B3A7F8120629F24008C4ED9 /* UIImage+StringStylizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A7F7F20629F1A008C4ED9 /* UIImage+StringStylizer.swift */; };
 		2BE7A29420216C650039610C /* StringStylizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE7A28B20216C650039610C /* StringStylizer.framework */; };
 		2BE7A2A220216C980039610C /* StringStylizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3F299A1CB2AB3200702DD3 /* StringStylizer.swift */; };
 		2BE7A2A320216C980039610C /* StringStylizerFontName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3F299B1CB2AB3200702DD3 /* StringStylizerFontName.swift */; };
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B3A7F7F20629F1A008C4ED9 /* UIImage+StringStylizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+StringStylizer.swift"; sourceTree = "<group>"; };
 		2BE7A28B20216C650039610C /* StringStylizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringStylizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE7A29320216C650039610C /* StringStylizer tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StringStylizer tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E3F29801CB2AB2600702DD3 /* StringStylizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringStylizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +121,7 @@
 				6E3F299B1CB2AB3200702DD3 /* StringStylizerFontName.swift */,
 				6E3F299C1CB2AB3200702DD3 /* StringStylizerStatus.swift */,
 				6E3F299D1CB2AB3200702DD3 /* String+StringStylizer.swift */,
+				2B3A7F7F20629F1A008C4ED9 /* UIImage+StringStylizer.swift */,
 				6E3F299E1CB2AB3200702DD3 /* Operator.swift */,
 				6E3F29851CB2AB2600702DD3 /* Info.plist */,
 			);
@@ -316,6 +320,7 @@
 				2BE7A2A320216C980039610C /* StringStylizerFontName.swift in Sources */,
 				2BE7A2A420216C980039610C /* StringStylizerStatus.swift in Sources */,
 				2BE7A2A520216C980039610C /* String+StringStylizer.swift in Sources */,
+				2B3A7F8120629F24008C4ED9 /* UIImage+StringStylizer.swift in Sources */,
 				2BE7A2A620216C980039610C /* Operator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +340,7 @@
 				6E3F29A21CB2AB3200702DD3 /* String+StringStylizer.swift in Sources */,
 				6E3F29A31CB2AB3200702DD3 /* Operator.swift in Sources */,
 				6E3F299F1CB2AB3200702DD3 /* StringStylizer.swift in Sources */,
+				2B3A7F8020629F1A008C4ED9 /* UIImage+StringStylizer.swift in Sources */,
 				6E3F29A11CB2AB3200702DD3 /* StringStylizerStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
