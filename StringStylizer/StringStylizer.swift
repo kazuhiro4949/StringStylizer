@@ -184,7 +184,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
         if let currentFont = _attributes[.font] as? UIFont {
             font = UIFont(name: name, size: currentFont.pointSize) ?? UIFont()
         } else {
-            font = UIFont(name: name, size: UIFont.systemFontSize) ?? UIFont()
+            font = UIFont(name: name, size: defaultFontSize) ?? UIFont()
         }
         
         _attributes[.font] = font
@@ -212,7 +212,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
         if let currentFont = _attributes[.font] as? UIFont {
             font = UIFont(name: name.rawValue, size: currentFont.pointSize) ?? UIFont()
         } else {
-            font = UIFont(name: name.rawValue, size: UIFont.systemFontSize) ?? UIFont()
+            font = UIFont(name: name.rawValue, size: defaultFontSize) ?? UIFont()
         }
         
         _attributes[.font] = font
@@ -515,6 +515,14 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
             alpha: CGFloat(alpha)
         )
     }
+
+    private var defaultFontSize: CGFloat {
+        #if os(tvOS)
+            return 17
+        #else
+            return UIFont.systemFontSize
+        #endif
+    }
 }
 
 public extension StringStylizer {
@@ -664,5 +672,4 @@ public extension StringStylizer where  T: Styling {
         let range = CountableRange<UInt>(uncheckedBounds: (lower: UInt(nsrange.location), upper: UInt(nsrange.location + nsrange.length)))
         return StringStylizer<NarrowDown>(attributedString: _attrString, range: range)
     }
-
 }
