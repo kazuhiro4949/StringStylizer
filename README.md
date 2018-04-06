@@ -34,7 +34,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 
 ## Requirements
 - iOS 8.0+
-- Swift 3.0 or Swift 2.3 (swift2.3 branch)
+- Swift 4.0~ or Swift 3.2~
 
 ## Installation
 ### Carthage
