@@ -67,11 +67,11 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     // MARK:- Initializer
     
     init(string: String, range: CountableRange<UInt>? = nil, attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey: Any]()) {
-        let range = range ?? 0..<UInt(string.characters.count)
-        
-        _attrString = NSAttributedString(string: string)
+        let attrString = NSAttributedString(string: string)
+
+        _attrString = attrString
         _attributes = attributes
-        _range = range
+        _range = range ?? 0..<UInt(attrString.length)
     }
     
     init(attributedString: NSAttributedString, range: CountableRange<UInt>, attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey: Any]()) {
