@@ -14,7 +14,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        centerLabel.attributedText = "aaa".stylize().color(.red).attr + #imageLiteral(resourceName: "Attachment").textAttachemnt(17, 17)
+
+        // build NSAttributedString.
+        let greed = " Hi, ".stylize().color(0x2200ee).size(12).font(.HelveticaNeue).attr
+        
+        // build NSAttributedString with ranges.
+        let msg = "something happened ".stylize()
+            .range(0..<9)        .color(0x009911).size(12).font(.HelveticaNeue)
+            .range(10..<UInt.max).color(0xaa22cc).size(14).font(.HelveticaNeue_Bold).attr
+        
+        // build NSAttributedString objects and join them.
+        let name = "to ".stylize().color(0x23abfc).size(12).font(.HelveticaNeue).attr +
+            "you👩‍👩‍👦‍👦".stylize().color(0x123456).size(14).font(.HelveticaNeue_Italic).underline(.styleDouble).attr
+        
+        centerLabel.attributedText = #imageLiteral(resourceName: "Attachment").textAttachemnt(17, 17) + greed + msg + name
     }
 
     override func didReceiveMemoryWarning() {
