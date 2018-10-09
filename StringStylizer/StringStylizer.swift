@@ -61,25 +61,45 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     public typealias UnicodeScalarLiteralType = String
     
     fileprivate var _attrString: NSAttributedString
+    #if swift(>=4.2)
+    fileprivate var _attributes = [NSAttributedString.Key: Any]()
+    #else
     fileprivate var _attributes = [NSAttributedStringKey: Any]()
+    #endif
     fileprivate var _range: CountableRange<UInt>
     
     // MARK:- Initializer
-    
-    init(string: String, range: CountableRange<UInt>? = nil, attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey: Any]()) {
+
+    #if swift(>=4.2)
+    init(string: String, range: CountableRange<UInt>? = nil, attributes: [NSAttributedString.Key: Any] = [:]) {
         let attrString = NSAttributedString(string: string)
 
         _attrString = attrString
         _attributes = attributes
         _range = range ?? 0..<UInt(attrString.length)
     }
-    
-    init(attributedString: NSAttributedString, range: CountableRange<UInt>, attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey: Any]()) {
+
+    init(attributedString: NSAttributedString, range: CountableRange<UInt>, attributes: [NSAttributedString.Key: Any] = [:]) {
         _attrString = attributedString
         _attributes = attributes
         _range = range
     }
-    
+    #else
+    init(string: String, range: CountableRange<UInt>? = nil, attributes: [NSAttributedStringKey: Any] = [:]) {
+        let attrString = NSAttributedString(string: string)
+
+        _attrString = attrString
+        _attributes = attributes
+        _range = range ?? 0..<UInt(attrString.length)
+    }
+
+    init(attributedString: NSAttributedString, range: CountableRange<UInt>, attributes: [NSAttributedStringKey: Any] = [:]) {
+        _attrString = attributedString
+        _attributes = attributes
+        _range = range
+    }
+    #endif
+
     public required init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
         _attrString = NSMutableAttributedString(string: value)
         _range = 0..<UInt(_attrString.string.characters.count)
@@ -309,7 +329,11 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func underline(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling> {
+        #if swift(>=4.2)
+        let _style: [NSUnderlineStyle] = style.isEmpty ? [.single] : style
+        #else
         let _style: [NSUnderlineStyle] = style.isEmpty ? [.styleSingle] : style
+        #endif
         
         let value = _style.reduce(0) { (sum, elem) -> Int in
             return sum | elem.rawValue
@@ -385,7 +409,11 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func strokeThrogh(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
+        #if swift(>=4.2)
+        let _style: [NSUnderlineStyle] = style.isEmpty ? [.single] : style
+        #else
         let _style: [NSUnderlineStyle] = style.isEmpty ? [.styleSingle] : style
+        #endif
         
         let value = _style.reduce(0) { (sum, elem) -> Int in
             return sum | elem.rawValue

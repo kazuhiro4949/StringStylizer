@@ -75,14 +75,23 @@ class StringStylizerTests: XCTestCase {
     }
     
     func testUnderline() {
+        #if swift(>=4.2)
+        let str = "StringStylizer".stylize().underline(.single).attr
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [.underlineStyle:  NSUnderlineStyle.single.rawValue])
+        #else
         let str = "StringStylizer".stylize().underline(.styleSingle).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.underlineStyle:  NSUnderlineStyle.styleSingle.rawValue])
+        #endif
         XCTAssert(str.isEqual(to: expected), "has underline attributed")
     }
 
     func testUnderlineNoneParam() {
         let str = "StringStylizer".stylize().underline().attr
+        #if swift(>=4.2)
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [.underlineStyle:  NSUnderlineStyle.single.rawValue])
+        #else
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.underlineStyle:  NSUnderlineStyle.styleSingle.rawValue])
+        #endif
         XCTAssert(str.isEqual(to: expected), "has underline attributed")
     }
 
@@ -93,14 +102,23 @@ class StringStylizerTests: XCTestCase {
     }
     
     func testStrokeThroghParam() {
+        #if swift(>=4.2)
+        let str = "StringStylizer".stylize().strokeThrogh(.double).attr
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.double.rawValue])
+        #else
         let str = "StringStylizer".stylize().strokeThrogh(.styleDouble).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.styleDouble.rawValue])
+        #endif
         XCTAssert(str.isEqual(to: expected), "has strokeThrogh attributed")
     }
     
     func testStrokeThroghBlankParam() {
         let str = "StringStylizer".stylize().strokeThrogh().attr
+        #if swift(>=4.2)
+        let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.single.rawValue])
+        #else
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.styleSingle.rawValue])
+        #endif
         XCTAssert(str.isEqual(to: expected), "has strokeThrogh attributed")
     }
     
