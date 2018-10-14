@@ -2,8 +2,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![Cocoapods compatible](https://cocoapod-badges.herokuapp.com/v/StringStylizer/1.1.1/badge.png)
-![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg)
-![Swift 3.2](https://img.shields.io/badge/Swift-3.2-orange.svg)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 
 Type strict builder class for [NSAttributedString](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSAttributedString_Class/). 
 
