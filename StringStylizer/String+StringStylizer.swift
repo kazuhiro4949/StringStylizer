@@ -30,7 +30,7 @@ public extension String {
     
      - returns: StringStylizer<Styling> "StringStylizer" object which is "Styling" state
      */
-    public func stylize() -> StringStylizer<Styling> {
+    func stylize() -> StringStylizer<Styling> {
         let attributer = StringStylizer<Styling>(string: self)
         return attributer
     }
@@ -41,7 +41,7 @@ public extension String {
      - parameter range:Range<UInt> range to apply attributes
      - returns: StringStylizer<Styling> "StringStylizer" object which is "Styling" state
      */
-    public func stylize(range: CountableRange<UInt>) -> StringStylizer<NarrowDown> {
+    func stylize(range: CountableRange<UInt>) -> StringStylizer<NarrowDown> {
         let attributer = StringStylizer<Styling>(string: self)
         return attributer.range(range)
     }
