@@ -14,7 +14,7 @@ public extension UIImage {
     ///
     /// - Parameter size: attachmented image size
     /// - Returns: NSTextAttachment
-    public func textAttachemnt(with size: CGSize) -> NSTextAttachment {
+    func textAttachemnt(with size: CGSize) -> NSTextAttachment {
         let textAttachemnt = NSTextAttachment()
         textAttachemnt.image = self
         textAttachemnt.bounds = CGRect(origin: .zero, size: size)
@@ -28,7 +28,7 @@ public extension UIImage {
     ///   - width: attachmented image width
     ///   - height:  attachmented image height
     /// - Returns: NSTextAttachment
-    public func textAttachemnt(_ width: CGFloat, _ height: CGFloat) -> NSTextAttachment {
+    func textAttachemnt(_ width: CGFloat, _ height: CGFloat) -> NSTextAttachment {
         let size = CGSize(width: width, height: height)
         return textAttachemnt(with: size)
     }

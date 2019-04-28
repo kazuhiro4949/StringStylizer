@@ -2,7 +2,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![Cocoapods compatible](https://cocoapod-badges.herokuapp.com/v/StringStylizer/1.1.1/badge.png)
-![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
 
 Type strict builder class for [NSAttributedString](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSAttributedString_Class/). 
 
@@ -13,9 +13,9 @@ Building NSAttributedString is so difficult because it requires us to remember a
 
 NSAttributedString has the following format.
 ```swift
-let attr: [String: AnyObject] = [
-    NSForegroundColorAttributeName: UIColor.whiteColor(),
-    NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 14)
+let attr: [NSAttributedString.Key: Any] = [
+    .foregroundColor: UIColor.white,
+    .font: UIFont(name: "HelveticaNeue", size: 14)
 ]
 let str = NSAttributedString(string: "some text", attributes: attr)
 ```
@@ -23,7 +23,7 @@ let str = NSAttributedString(string: "some text", attributes: attr)
 StringStylizer enable developers to read and write their code in a linear manner.
 If you wanna convert String to NSAttributedString which has some colors, sizes and fonts, you can write that as follows.
 ```swift
-let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeue).attr
+let str = "some text".stylize().color(.white).size(14).font(.HelveticaNeue).attr
 ```
 
 ## Feature
@@ -33,7 +33,7 @@ let str = "some text".stylize().color(.whiteColor()).size(14).font(.HelveticaNeu
 
 ## Requirements
 - iOS 8.0+
-- Swift 4.0~ or Swift 3.2~
+- Swift 5.0~ or Swift 4.0~ or Swift 3.2~
 
 ## Installation
 ### Carthage
@@ -69,7 +69,7 @@ $(SRCROOT)/Carthage/Build/iOS/StringStylizer.framework
 ```
 + Write Import statement on your source file
 ```
-Import StringStylizer
+import StringStylizer
 ```
 
 ### CocoaPods
@@ -108,23 +108,21 @@ open .xcworkspace
 
 ## Example
  
- ```swift
- let label = UILabel(frame: CGRectMake(0, 0, 100, 50))
- 
- // build NSAttributedString.
- let greed = "Hi, ".stylize().color(0x2200ee).size(12).font(.HelveticaNeue).attr
- 
- // build NSAttributedString with ranges.
- let msg = "something happened ".stylize()
-                .range(0..<9)        .color(0x009911).size(12).font(.HelveticaNeue)
-                .range(10..<UInt.max).color(0xaa22cc).size(14).font(.HelveticaNeue_Bold).attr
- 
- // build NSAttributedString objects and join them.
- let name = "to ".stylize().color(0x23abfc).size(12).font(.HelveticaNeue).attr +
-            "you".stylize().color(0x123456).size(14).font(.HelveticaNeue_Italic).underline(.StyleDouble).attr
- 
- label.attributedText = greed + msg + name
- ```
+```swift
+let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+
+// build NSAttributedString.
+let greed = "Hi, ".stylize().color(0x2200ee).size(12).font(.HelveticaNeue).attr
+
+// build NSAttributedString with ranges.
+let msg = "something happened ".stylize()
+    .range(0..<9)        .color(0x009911).size(12).font(.HelveticaNeue)
+    .range(10..<UInt.max).color(0xaa22cc).size(14).font(.HelveticaNeue_Bold).attr
+
+// build NSAttributedString objects and join them.
+let name = "to ".stylize().color(0x23abfc).size(12).font(.HelveticaNeue).attr +
+    "you".stylize().color(0x123456).size(14).font(.HelveticaNeue_Italic).underline(.double).attr
+```
 
 This sample generates a styled label.
  
@@ -138,7 +136,7 @@ extension StringStylizer {
             .color(0x123456)
             .size(14)
             .font(.HelveticaNeue_Italic)
-            .underline(.StyleDouble)
+            .underline(.double)
             .attr
   }
 }

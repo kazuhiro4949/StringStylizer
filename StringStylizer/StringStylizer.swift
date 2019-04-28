@@ -102,17 +102,17 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
 
     public required init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
         _attrString = NSMutableAttributedString(string: value)
-        _range = 0..<UInt(_attrString.string.characters.count)
+        _range = 0..<UInt(_attrString.string.count)
     }
     
     public required init(stringLiteral value: StringLiteralType) {
         _attrString = NSMutableAttributedString(string: value)
-        _range = 0..<UInt(_attrString.string.characters.count)
+        _range = 0..<UInt(_attrString.string.count)
     }
     
     public required init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
         _attrString = NSMutableAttributedString(string: value)
-        _range = 0..<UInt(_attrString.string.characters.count)
+        _range = 0..<UInt(_attrString.string.count)
     }
     
     // MARK:- Attributes
@@ -554,13 +554,13 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
 }
 
 public extension StringStylizer {
-    public func paragraph(_ style: NSParagraphStyle) -> StringStylizer<Styling> {
+    func paragraph(_ style: NSParagraphStyle) -> StringStylizer<Styling> {
         _attributes[.paragraphStyle] = style
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
 
-    public func paragraphAlignment(_ alignment: NSTextAlignment) -> StringStylizer<Styling> {
+    func paragraphAlignment(_ alignment: NSTextAlignment) -> StringStylizer<Styling> {
         let style: NSMutableParagraphStyle
         if let currentStyle = _attributes[.paragraphStyle] as? NSMutableParagraphStyle {
             currentStyle.alignment = alignment
@@ -575,7 +575,7 @@ public extension StringStylizer {
         return stylizer
     }
 
-    public func paragraphIndent(firstLineHead: CGFloat? = nil, tail: CGFloat? = nil, otherHead: CGFloat? = nil) -> StringStylizer<Styling> {
+    func paragraphIndent(firstLineHead: CGFloat? = nil, tail: CGFloat? = nil, otherHead: CGFloat? = nil) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         
         if let firstLineHead = firstLineHead {
@@ -595,7 +595,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphLineBreak(_ lineBreakMode: NSLineBreakMode) -> StringStylizer<Styling> {
+    func paragraphLineBreak(_ lineBreakMode: NSLineBreakMode) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         style.lineBreakMode = lineBreakMode
         
@@ -604,7 +604,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphLineHeight(maximum: CGFloat? = nil, minimum: CGFloat? = nil, multiple: CGFloat? = nil) -> StringStylizer<Styling> {
+    func paragraphLineHeight(maximum: CGFloat? = nil, minimum: CGFloat? = nil, multiple: CGFloat? = nil) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         
         if let maximum = maximum {
@@ -624,7 +624,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphLineSpacing(after: CGFloat? = nil, before: CGFloat? = nil) -> StringStylizer<Styling> {
+    func paragraphLineSpacing(after: CGFloat? = nil, before: CGFloat? = nil) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         
         if let after = after {
@@ -640,7 +640,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphBaseWritingDirection(_ baseWritingDirection: NSWritingDirection) -> StringStylizer<Styling> {
+    func paragraphBaseWritingDirection(_ baseWritingDirection: NSWritingDirection) -> StringStylizer<Styling> {
         let style: NSMutableParagraphStyle
         if let currentStyle = _attributes[.paragraphStyle] as? NSMutableParagraphStyle {
             style = currentStyle
@@ -655,7 +655,7 @@ public extension StringStylizer {
         return stylizer
     }
     
-    public func paragraphParagraphSpacing(_ spacing: CGFloat) -> StringStylizer<Styling> {
+    func paragraphParagraphSpacing(_ spacing: CGFloat) -> StringStylizer<Styling> {
         let style = getParagraphStyle()
         style.paragraphSpacing = spacing
         _attributes[.paragraphStyle] = style
@@ -674,7 +674,7 @@ public extension StringStylizer {
 
 public extension StringStylizer where  T: Styling {
     /// generates NSAttributedString
-    public var attr: NSAttributedString {
+    var attr: NSAttributedString {
         let range: Range = Int(_range.startIndex)..<Int(_range.endIndex)
         let attrString = NSMutableAttributedString(attributedString: _attrString)
         attrString.setAttributes(_attributes, range: NSRange(range))
@@ -687,7 +687,7 @@ public extension StringStylizer where  T: Styling {
      - parameter range:Range (default: nil)
      - returns: StringStylizer<NarrowDown>
      */
-    public func range(_ range: CountableRange<UInt>? = nil) -> StringStylizer<NarrowDown> {
+    func range(_ range: CountableRange<UInt>? = nil) -> StringStylizer<NarrowDown> {
         let attrString = NSMutableAttributedString(attributedString: _attrString)
         attrString.setAttributes(_attributes, range: NSRange(Int(_range.startIndex)..<Int(_range.endIndex)))
         
@@ -703,7 +703,7 @@ public extension StringStylizer where  T: Styling {
      - parameter rangeString: String
      - returns: StringStylizer<NarrowDown>
     */
-    public func search(_ rangeString: String) -> StringStylizer<NarrowDown> {
+    func search(_ rangeString: String) -> StringStylizer<NarrowDown> {
         let nsrange = NSString(string: _attrString.string).range(of: rangeString)
         let range = CountableRange<UInt>(uncheckedBounds: (lower: UInt(nsrange.location), upper: UInt(nsrange.location + nsrange.length)))
         return StringStylizer<NarrowDown>(attributedString: _attrString, range: range)

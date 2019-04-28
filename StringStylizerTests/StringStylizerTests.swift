@@ -224,7 +224,7 @@ class StringStylizerTests: XCTestCase {
         let expectedHead = NSMutableAttributedString(string: "String")
         expectedHead.addAttributes(
             [.foregroundColor: UIColor.white],
-            range: NSRange(5..<"String".characters.count)
+            range: NSRange(5..<"String".count)
         )
         let expectedTail = NSMutableAttributedString(string: "Stylizer")
         expectedTail.addAttributes(
