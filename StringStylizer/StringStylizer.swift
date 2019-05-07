@@ -297,7 +297,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      
      
-     "StringStylizer".stylize().karn(5).attr
+     "StringStylizer".stylize().kern(5).attr
      
      ```
      <img width="210" src="https://cloud.githubusercontent.com/assets/18320004/14388994/94d50894-fdeb-11e5-9e78-7c31480bb00c.png">
@@ -305,7 +305,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - parameter value:Double
      - returns: StringStylizer<Styling>
      */
-    open func karn(_ value: Double) -> StringStylizer<Styling> {
+    open func kern(_ value: Double) -> StringStylizer<Styling> {
         _attributes[.kern] = value as Any
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
@@ -398,7 +398,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      
      
-     "StringStylizer".stylize().strokeThrogh(.StyleDouble, rgb: 0xff0000, alpha: 1).attr
+     "StringStylizer".stylize().strikeThrough(.StyleDouble, rgb: 0xff0000, alpha: 1).attr
      
      ```
      <img width="139" src="https://cloud.githubusercontent.com/assets/18320004/14389273/ddc222f2-fdec-11e5-9a80-0181383ef553.png">
@@ -408,7 +408,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    open func strokeThrogh(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
+    open func strikeThrough(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
         #if swift(>=4.2)
         let _style: [NSUnderlineStyle] = style.isEmpty ? [.single] : style
         #else
@@ -494,7 +494,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - parameter value:Int
      - returns: StringStylizer<Styling>
      */
-    open func ligeture(_ value: Int) -> StringStylizer<Styling> {
+    open func ligature(_ value: Int) -> StringStylizer<Styling> {
         _attributes[.ligature] = value as Any
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer

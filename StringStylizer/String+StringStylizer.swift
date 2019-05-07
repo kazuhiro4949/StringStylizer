@@ -47,3 +47,11 @@ public extension String {
     }
 }
 
+
+public extension Optional where Wrapped == String {
+    
+    func stylize() -> StringStylizer<Styling> {
+        return (self ?? "").stylize()
+    }
+    
+}

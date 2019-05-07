@@ -27,7 +27,10 @@ class ViewController: UIViewController {
         let name = "to ".stylize().color(0x23abfc).size(12).font(.HelveticaNeue).attr +
             "you👩‍👩‍👦‍👦".stylize().color(0x123456).size(14).font(.HelveticaNeue_Italic).underline(.double).attr
         
-        centerLabel.attributedText = #imageLiteral(resourceName: "Attachment").textAttachemnt(17, 17) + greed + msg + name
+        // build NSAttributedString objects with strikethrough and kerning applied.
+        let response = "\nHow ".stylize().attr +  "boring".stylize().strikeThrough(.single).attr + " exciting!".stylize().kern(-2).attr
+        
+        centerLabel.attributedText = #imageLiteral(resourceName: "Attachment").textAttachment(17, 17) + greed + msg + name + response
     }
 
     override func didReceiveMemoryWarning() {
