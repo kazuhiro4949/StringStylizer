@@ -101,7 +101,7 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expected), "has stroke attributed")
     }
     
-    func teststrikeThroughParam() {
+    func testStrikeThroughParam() {
         #if swift(>=4.2)
         let str = "StringStylizer".stylize().strikeThrough(.double).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.double.rawValue])
@@ -112,7 +112,7 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expected), "has strikeThrough attributed")
     }
     
-    func teststrikeThroughBlankParam() {
+    func testStrikeThroughBlankParam() {
         let str = "StringStylizer".stylize().strikeThrough().attr
         #if swift(>=4.2)
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.single.rawValue])
@@ -157,7 +157,7 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expected), "has shadow attributed")
     }
     
-    func testligatureParam() {
+    func testLigatureParam() {
         let str = "StringStylizer".stylize().ligature(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.ligature:  1])
         XCTAssert(str.isEqual(to: expected), "has ligature attributed")
