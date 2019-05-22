@@ -296,6 +296,19 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expcted), "has paragraph Indent")
     }
     
+    func testOptionalString() {
+        let nothing: String? = nil
+        let something = "StringStylizer"
+        
+        let combined = (
+            nothing.stylize().attr +
+            something.stylize().attr
+        )
+        
+        let expected = NSAttributedString(string: "StringStylizer")
+        XCTAssert(combined.isEqual(expected), "optional StringStylized strings do not add any content to the resulting NSAttributedString")
+    }
+    
     // MARK:- private
     fileprivate func rgb(_ rgb: UInt, alpha: Double) -> UIColor {
         return UIColor(
