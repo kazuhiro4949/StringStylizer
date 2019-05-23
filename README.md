@@ -112,7 +112,7 @@ open .xcworkspace
 let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
 
 // build NSAttributedString.
-let greed = "Hi, ".stylize().color(0x2200ee).size(12).font(.HelveticaNeue).attr
+let greeting = "Hi, ".stylize().color(0x2200ee).size(12).font(.HelveticaNeue).attr
 
 // build NSAttributedString with ranges.
 let msg = "something happened ".stylize()
@@ -122,11 +122,15 @@ let msg = "something happened ".stylize()
 // build NSAttributedString objects and join them.
 let name = "to ".stylize().color(0x23abfc).size(12).font(.HelveticaNeue).attr +
     "you".stylize().color(0x123456).size(14).font(.HelveticaNeue_Italic).underline(.double).attr
+    
+// build NSAttributedString objects with strikethrough and kerning applied.
+let response = "\nHow ".stylize().attr +  "boring".stylize().strikeThrough(.single).attr +
+    " exciting!".stylize().kern(-2).attr
 ```
 
 This sample generates a styled label.
  
-<img width="350" src="https://cloud.githubusercontent.com/assets/18266814/14254571/49882d08-facb-11e5-9e3d-c37cbef6a003.png">
+<img width="350" src="https://user-images.githubusercontent.com/2948712/58213150-3fe99980-7d45-11e9-8b4c-9da54ff156de.png">
 
 Of course, you can wrap up the method chains. 
 ```swift
@@ -148,6 +152,12 @@ label.attributedText = "you".stylize().strong()
 #### 1. Convert String to StringStylizer object
 ```swift
 let firstStep = "yay!".stylize() // => StringStylizer<Styling>
+```
+
+##### 1a. Alternatively, use an optional String
+```swift
+let optionalString:String? = nil
+let firstStep = optionalString.stylize() // => StringStylizer<Styling>
 ```
 #### 2. Call methods to select range. Then, StringStylizer change into "NarrowDown" state
 ```swift
@@ -176,7 +186,7 @@ StringStylizer is based on **"Builder Pattern"** (Effective Java version). In ad
 <img width="800" src="https://cloud.githubusercontent.com/assets/18320004/18075348/f038fec8-6eae-11e6-8e9c-98c0fa39bcde.png">
 
 Because of them, we are able to
-- write our code in a liner manner
+- write our code in a linear manner
 - call proper methods depending on the situation.
 
 ## License

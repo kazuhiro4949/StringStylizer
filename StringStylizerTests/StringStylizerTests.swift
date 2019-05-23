@@ -68,10 +68,10 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expected), "has background attributed")
     }
     
-    func testKarn() {
-        let str = "StringStylizer".stylize().karn(1).attr
+    func testkern() {
+        let str = "StringStylizer".stylize().kern(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.kern: 1])
-        XCTAssert(str.isEqual(to: expected), "has karn attributed")
+        XCTAssert(str.isEqual(to: expected), "has kern attributed")
     }
     
     func testUnderline() {
@@ -101,25 +101,25 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expected), "has stroke attributed")
     }
     
-    func testStrokeThroghParam() {
+    func testStrikeThroughParam() {
         #if swift(>=4.2)
-        let str = "StringStylizer".stylize().strokeThrogh(.double).attr
+        let str = "StringStylizer".stylize().strikeThrough(.double).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.double.rawValue])
         #else
-        let str = "StringStylizer".stylize().strokeThrogh(.styleDouble).attr
+        let str = "StringStylizer".stylize().strikeThrough(.styleDouble).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.styleDouble.rawValue])
         #endif
-        XCTAssert(str.isEqual(to: expected), "has strokeThrogh attributed")
+        XCTAssert(str.isEqual(to: expected), "has strikeThrough attributed")
     }
     
-    func testStrokeThroghBlankParam() {
-        let str = "StringStylizer".stylize().strokeThrogh().attr
+    func testStrikeThroughBlankParam() {
+        let str = "StringStylizer".stylize().strikeThrough().attr
         #if swift(>=4.2)
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.single.rawValue])
         #else
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.strikethroughStyle:  NSUnderlineStyle.styleSingle.rawValue])
         #endif
-        XCTAssert(str.isEqual(to: expected), "has strokeThrogh attributed")
+        XCTAssert(str.isEqual(to: expected), "has strikeThrough attributed")
     }
     
     func testShadowParam() {
@@ -157,10 +157,10 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(str.isEqual(to: expected), "has shadow attributed")
     }
     
-    func testLigetureParam() {
-        let str = "StringStylizer".stylize().ligeture(1).attr
+    func testLigatureParam() {
+        let str = "StringStylizer".stylize().ligature(1).attr
         let expected = NSAttributedString(string: "StringStylizer", attributes: [.ligature:  1])
-        XCTAssert(str.isEqual(to: expected), "has ligeture attributed")
+        XCTAssert(str.isEqual(to: expected), "has ligature attributed")
     }
     
     func testBaselineParam() {
@@ -294,6 +294,19 @@ class StringStylizerTests: XCTestCase {
         style.baseWritingDirection = .rightToLeft
         let expcted = NSMutableAttributedString(string: "StringStylizer", attributes: [.paragraphStyle: style])
         XCTAssert(str.isEqual(to: expcted), "has paragraph Indent")
+    }
+    
+    func testOptionalString() {
+        let nothing: String? = nil
+        let something = "StringStylizer"
+        
+        let combined = (
+            nothing.stylize().attr +
+            something.stylize().attr
+        )
+        
+        let expected = NSAttributedString(string: "StringStylizer")
+        XCTAssert(combined.isEqual(expected), "optional StringStylized strings do not add any content to the resulting NSAttributedString")
     }
     
     // MARK:- private
