@@ -40,6 +40,62 @@ public func + (left: NSAttributedString, right: NSAttributedString) -> NSAttribu
 }
 
 /**
+ combine two NSAttributedString object
+ 
+ 
+ - paramter left:NSAttributedString?
+ - paramter right:NSAttributedString
+ 
+ - returns: NSAttributedString
+ */
+public func + (left: NSAttributedString?, right: NSAttributedString) -> NSAttributedString {
+    let concat = NSMutableAttributedString()
+    if let left = left {
+        concat.append(left)
+    }
+    concat.append(right)
+    return concat
+}
+
+/**
+ combine two NSAttributedString object
+ 
+ 
+ - paramter left:NSAttributedString
+ - paramter right:NSAttributedString?
+ 
+ - returns: NSAttributedString
+ */
+public func + (left: NSAttributedString, right: NSAttributedString?) -> NSAttributedString {
+    let concat = NSMutableAttributedString()
+    concat.append(left)
+    if let right = right {
+        concat.append(right)
+    }
+    return concat
+}
+
+/**
+ combine two NSAttributedString object
+ 
+ 
+ - paramter left:NSAttributedString?
+ - paramter right:NSAttributedString?
+ 
+ - returns: NSAttributedString
+ */
+public func + (left: NSAttributedString?, right: NSAttributedString?) -> NSAttributedString {
+    let concat = NSMutableAttributedString()
+    if let left = left {
+        concat.append(left)
+    }
+    if let right = right {
+        concat.append(right)
+    }
+    return concat
+}
+
+/**
  append NSAttributedString object
 
  
@@ -69,4 +125,24 @@ public func + (left: NSAttributedString, right: NSTextAttachment) -> NSAttribute
 /// - Returns: combinded NSAttributedString
 public func + (left: NSTextAttachment, right: NSAttributedString) -> NSAttributedString {
     return NSAttributedString(attachment: left) + right
+}
+
+/// combine two NSAttributedString and NSTextAttachment objects
+///
+/// - Parameters:
+///   - left: NSAttributedString
+///   - right: NSTextAttachment?
+/// - Returns: combinded NSAttributedString
+public func + (left: NSAttributedString, right: NSTextAttachment?) -> NSAttributedString {
+    return left + right.flatMap(NSAttributedString.init(attachment:))
+}
+
+/// combine two NSTextAttachment and NSAttributedString objects
+///
+/// - Parameters:
+///   - left: NSTextAttachment?
+///   - right: NSAttributedString
+/// - Returns: combinded NSAttributedString
+public func + (left: NSTextAttachment?, right: NSAttributedString) -> NSAttributedString {
+    return left.flatMap(NSAttributedString.init(attachment:)) + right
 }

@@ -309,6 +309,32 @@ class StringStylizerTests: XCTestCase {
         XCTAssert(combined.isEqual(expected), "optional StringStylized strings do not add any content to the resulting NSAttributedString")
     }
     
+    func testOptionalAttributedString() {
+        let optional: NSAttributedString? = "a".stylize().attr
+        let notOptional: NSAttributedString = "b".stylize().attr
+
+        do {
+            let actual = optional + notOptional
+            
+            let expected = NSAttributedString(string: "ab")
+            XCTAssertEqual(actual, expected)
+        }
+        
+        do {
+            let actual = notOptional + optional
+            
+            let expected = NSAttributedString(string: "ba")
+            XCTAssertEqual(actual, expected)
+        }
+
+        do {
+            let actual = optional + optional
+            
+            let expected = NSAttributedString(string: "aa")
+            XCTAssertEqual(actual, expected)
+        }
+    }
+    
     // MARK:- private
     fileprivate func rgb(_ rgb: UInt, alpha: Double) -> UIColor {
         return UIColor(
