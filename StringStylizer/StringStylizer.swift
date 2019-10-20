@@ -663,6 +663,23 @@ public extension StringStylizer {
         return stylizer
     }
     
+    func paragraphTabStop(alignment: NSTextAlignment = .natural, location: CGFloat, options: [NSTextTab.OptionKey : Any] = [:]) -> StringStylizer<Styling> {
+        let textTab = NSTextTab(textAlignment: alignment, location: location, options: options)
+        return paragraphTabStop(textTab)
+    }
+    
+    func paragraphTabStop(_ textTab: NSTextTab) -> StringStylizer<Styling> {
+        return paragraphTabStops([textTab])
+    }
+    
+    func paragraphTabStops(_ textTabs: [NSTextTab]) -> StringStylizer<Styling> {
+        let style = getParagraphStyle()
+        style.tabStops = textTabs
+        _attributes[.paragraphStyle] = style
+        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
+        return stylizer
+    }
+    
     fileprivate func getParagraphStyle() -> NSMutableParagraphStyle {
         if let currentStyle = _attributes[.paragraphStyle] as? NSMutableParagraphStyle {
             return currentStyle
