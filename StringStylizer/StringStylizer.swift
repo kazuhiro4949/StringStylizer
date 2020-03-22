@@ -126,7 +126,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     ```
     
      
-     "StringStylizer".stylize().color(.redColor()).attr
+     "StringStylizer".stylize().color(0xff0000).attr
     `
      ``
     <img width="143" src="https://cloud.githubusercontent.com/assets/18320004/14388487/52403352-fde9-11e5-86fe-f94224dcc747.png">
@@ -136,9 +136,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
     - returns: StringStylizer<Styling>
     */
     open func color(_ rgb: UInt, alpha: Double = 1.0) -> StringStylizer<Styling> {
-        _attributes[.foregroundColor] = self.rgb(rgb, alpha: alpha)
-        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
-        return stylizer
+        return color(self.rgb(rgb, alpha: alpha))
     }
     
     /**
@@ -149,7 +147,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      
      
-     "StringStylizer".stylize().color(0xff0000).attr
+     "StringStylizer".stylize().color(.red).attr
      
      ```
      <img width="143" src="https://cloud.githubusercontent.com/assets/18320004/14388487/52403352-fde9-11e5-86fe-f94224dcc747.png">
@@ -206,10 +204,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
         } else {
             font = UIFont(name: name, size: defaultFontSize) ?? UIFont()
         }
-        
-        _attributes[.font] = font
-        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
-        return stylizer
+        return self.font(font)
     }
     
     /**
@@ -234,10 +229,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
         } else {
             font = UIFont(name: name.rawValue, size: defaultFontSize) ?? UIFont()
         }
-        
-        _attributes[.font] = font
-        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
-        return stylizer
+        return self.font(font)
     }
     
     /**
@@ -262,10 +254,7 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
         } else {
             font = UIFont.systemFont(ofSize: CGFloat(size))
         }
-        
-        _attributes[.font] = font
-        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
-        return stylizer
+        return self.font(font)
     }
     
     /**
@@ -285,7 +274,26 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      - returns: StringStylizer<Styling>
      */
     open func background(_ rgb: UInt, alpha: Double = 1.0) -> StringStylizer<Styling> {
-        _attributes[.backgroundColor] = self.rgb(rgb, alpha: alpha)
+        return background(self.rgb(rgb, alpha: alpha))
+    }
+
+    /**
+     The value of NSBackgroundColorAttributeName
+
+     ### example
+     ```
+
+
+     "StringStylizer".stylize().background(.red).attr
+
+     ```
+     <img width="153" src="https://cloud.githubusercontent.com/assets/18320004/14388921/4a685702-fdeb-11e5-8005-efe8024beeb9.png">
+
+     - parameter color:UIColor
+     - returns: StringStylizer<Styling>
+     */
+    open func background(_ color: UIColor) -> StringStylizer<Styling> {
+        _attributes[.backgroundColor] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -318,28 +326,45 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      
      
-     "StringStylizer".stylize().underline(.StyleSingle, rgb: 0xff0000, alpha: 0.5).attr
+     "StringStylizer".stylize().underline(.single, rgb: 0xff0000, alpha: 0.5).attr
      
      ```
      <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389065/db66f77c-fdeb-11e5-8182-de300c85dc0e.png">
      
-     - parameter style:NSUnderlineStyle...
+     - parameter style:NSUnderlineStyle
      - parameter rgb:UInt? (default:nil)
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    open func underline(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling> {
+    open func underline(_ style: NSUnderlineStyle = [], rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling> {
+        return underline(style, color: rgb.flatMap { self.rgb($0, alpha: alpha) })
+    }
+
+    /**
+     The values of NSUnderlineStyleAttributeName and NSUnderlineColorAttributeName
+
+     ### example
+     ```
+
+
+     "StringStylizer".stylize().underline(.single, color: .red).attr
+
+     ```
+     <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389065/db66f77c-fdeb-11e5-8182-de300c85dc0e.png">
+
+     - parameter style:NSUnderlineStyle
+     - parameter color:UIColor (default:nil)
+     - returns: StringStylizer<Styling>
+     */
+    open func underline(_ style: NSUnderlineStyle = [], color: UIColor? = nil) -> StringStylizer<Styling> {
         #if swift(>=4.2)
-        let _style: [NSUnderlineStyle] = style.isEmpty ? [.single] : style
+        let _style: NSUnderlineStyle = style.isEmpty ? [.single] : style
         #else
-        let _style: [NSUnderlineStyle] = style.isEmpty ? [.styleSingle] : style
+        let _style: NSUnderlineStyle = style.isEmpty ? [.styleSingle] : style
         #endif
-        
-        let value = _style.reduce(0) { (sum, elem) -> Int in
-            return sum | elem.rawValue
-        }
-        _attributes[.underlineStyle] = value as Any
-        _attributes[.underlineColor] = rgb.flatMap { self.rgb($0, alpha: alpha) }
+
+        _attributes[.underlineStyle] = _style.rawValue as Any
+        _attributes[.underlineColor] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
@@ -356,17 +381,15 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389200/7fca9c74-fdec-11e5-996b-3ead1ac564cc.png">
      
-     - parameter rgb:UInt? (default:nil)
+     - parameter rgb:UInt
      - parameter alpha:Double (default:1.0)
+     - parameter width:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    open func stroke(rgb: UInt, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
-        _attributes[.strokeWidth] = width as Any
-        _attributes[.strokeColor] = self.rgb(rgb, alpha: alpha)
-        let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
-        return stylizer
+    open func stroke(rgb: UInt, alpha: Double = 1, width: Double = 1) -> StringStylizer<Styling>  {
+        return stroke(color: self.rgb(rgb, alpha: alpha), width: width)
     }
-    
+
     /**
      The values of NSStrokeWidthAttributeName and NSStrokeColorAttributeName
      
@@ -374,17 +397,16 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      
      
-     "StringStylizer".stylize().stroke(color: .redColor(), alpha: 1, width: 2).attr
+     "StringStylizer".stylize().stroke(color: .red, width: 2).attr
      
      ```
      <img width="135" src="https://cloud.githubusercontent.com/assets/18320004/14389200/7fca9c74-fdec-11e5-996b-3ead1ac564cc.png">
      
      - parameter color:UIColor
-     - parameter alpha:Double (default:1.0)
      - parameter width:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    open func stroke(color: UIColor, alpha: Double = 1.0,  width: Double = 1) -> StringStylizer<Styling>  {
+    open func stroke(color: UIColor, width: Double = 1) -> StringStylizer<Styling>  {
         _attributes[.strokeWidth] = width as Any
         _attributes[.strokeColor] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
@@ -398,29 +420,45 @@ open class StringStylizer<T: StringStylizerStatus>: ExpressibleByStringLiteral {
      ```
      
      
-     "StringStylizer".stylize().strikeThrough(.StyleDouble, rgb: 0xff0000, alpha: 1).attr
+     "StringStylizer".stylize().strikeThrough(.double, rgb: 0xff0000, alpha: 1).attr
      
      ```
      <img width="139" src="https://cloud.githubusercontent.com/assets/18320004/14389273/ddc222f2-fdec-11e5-9a80-0181383ef553.png">
      
-     - parameter style:NSUnderlineStyle...
+     - parameter style:NSUnderlineStyle
      - parameter rgb:UInt? (default:nil)
      - parameter alpha:Double (default:1.0)
      - returns: StringStylizer<Styling>
      */
-    open func strikeThrough(_ style: NSUnderlineStyle..., rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
+    open func strikeThrough(_ style: NSUnderlineStyle = [], rgb: UInt? = nil, alpha: Double = 1) -> StringStylizer<Styling>  {
+        return strikeThrough(style, color: rgb.flatMap { self.rgb($0, alpha: alpha) })
+    }
+
+    /**
+     The values of NSStrikethroughStyleAttributeName and NSStrikethroughColorAttributeName
+
+     ### example
+     ```
+
+
+     "StringStylizer".stylize().strikeThrough(.StyleDouble, rgb: 0xff0000, alpha: 1).attr
+
+     ```
+     <img width="139" src="https://cloud.githubusercontent.com/assets/18320004/14389273/ddc222f2-fdec-11e5-9a80-0181383ef553.png">
+
+     - parameter style:NSUnderlineStyle
+     - parameter color:UIColor? (default:nil)
+     - returns: StringStylizer<Styling>
+     */
+    open func strikeThrough(_ style: NSUnderlineStyle = [], color: UIColor? = nil) -> StringStylizer<Styling>  {
         #if swift(>=4.2)
-        let _style: [NSUnderlineStyle] = style.isEmpty ? [.single] : style
+        let _style: NSUnderlineStyle = style.isEmpty ? [.single] : style
         #else
-        let _style: [NSUnderlineStyle] = style.isEmpty ? [.styleSingle] : style
+        let _style: NSUnderlineStyle = style.isEmpty ? [.styleSingle] : style
         #endif
-        
-        let value = _style.reduce(0) { (sum, elem) -> Int in
-            return sum | elem.rawValue
-        }
-        
-        _attributes[.strikethroughStyle] = value as Any
-        _attributes[.strikethroughColor] = rgb.flatMap { self.rgb($0, alpha: alpha) }
+
+        _attributes[.strikethroughStyle] = _style.rawValue as Any
+        _attributes[.strikethroughColor] = color
         let stylizer = StringStylizer<Styling>(attributedString: _attrString, range: _range, attributes: _attributes)
         return stylizer
     }
