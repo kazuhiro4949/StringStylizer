@@ -21,7 +21,8 @@ let package = Package(
         .target(
             name: "StringStylizer",
             dependencies: [],
-            path: "StringStylizer"),
+            path: "StringStylizer",
+            exclude: ["Info.plist"]),
         .testTarget(
             name: "StringStylizerTests",
             dependencies: []),
