@@ -36,6 +36,17 @@ let str = "some text".stylize().color(.white).size(14).font(.HelveticaNeue).attr
 - Swift 5.0~ or Swift 4.0~ or Swift 3.2~
 
 ## Installation
+### Swift Package Manager
+The Swift Package Manager is a tool for automating the distribution of Swift code and is integrated into the swift compiler.
+
+Once you have your Swift package set up, adding StringStylizer as a dependency is as easy as adding it to the dependencies value of your Package.swift.
+
+```
+dependencies: [
+    .package(url: "https://github.com/vanvo/StringStylizer.git", .upToNextMajor(from: "5.2.2"))
+]
+```
+
 ### Carthage
 
 + Install Carthage from Homebrew
